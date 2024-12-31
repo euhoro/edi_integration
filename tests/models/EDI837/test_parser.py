@@ -7,6 +7,7 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from models.EDI837.EDI837_idets import Edi837Idets
+from tests.common_test_utils import get_root_path
 
 edi_837_json = """{
   "heading": {
@@ -321,7 +322,7 @@ class TestDataParsing(unittest.TestCase):
         # Parsing the JSON into the Python POJO
         import json
 
-        # edi_837_data = EDI837Stedi.model_validate(edi_837_json)
+        # edi_837_data = EDI837idests.model_validate(edi_837_json)
         edi_837_data = json.loads(edi_837_json)
 
         # Use the updated EDI837 model to parse the JSON
@@ -340,12 +341,7 @@ class TestDataParsing(unittest.TestCase):
     def test_parse_from_file(self):
         """Test parsing data from a file."""
         #file_path = os.path.dirname(os.path.abspath(__file__))  #
-        current_path = Path(__file__).resolve()
-        root_path = current_path.parent
-        while root_path.name != "tests":
-            root_path = root_path.parent
-        root_path = root_path.parent  # Get the parent of 'tests'
-
+        root_path = get_root_path()
 
         file_path = os.path.join(str(root_path), "resources/02_837_input_json/X222-COB-claim-from-billing-provider-to-payer-b.json")
         edi_837 = self.load_edi_from_file(file_path)
@@ -365,7 +361,7 @@ class TestDataParsing(unittest.TestCase):
             # Read the content of the temporary file and load as JSON
             parsed_data = json.load(temp_file)
 
-            # Validate and parse the JSON content using the EDI837Stedi model
+            # Validate and parse the JSON content using the EDI837idests model
             try:
                 edi_837 = Edi837Idets.parse_obj(parsed_data)
             except ValidationError as e:
@@ -382,7 +378,7 @@ class TestDataParsing(unittest.TestCase):
         with open(file_path, "r") as file:
             parsed_data = json.load(file)
 
-        # Validate and parse the JSON content using the EDI837Stedi model
+        # Validate and parse the JSON content using the EDI837idests model
         try:
             edi_837 = Edi837Idets.parse_obj(parsed_data)
             return edi_837

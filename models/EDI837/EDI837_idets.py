@@ -10,7 +10,7 @@ from pydantic import BaseModel
 class CompositeMedicalProcedureIdentifier(BaseModel):
     product_or_service_id_qualifier_01: str
     procedure_code_02: str
-    procedure_modifier_03: Optional[str]  # Optional as modifiers may not always be present
+    procedure_modifier_03: Optional[str] =None # Optional as modifiers may not always be present
 
 
 class CompositeDiagnosisCodePointer(BaseModel):
@@ -46,15 +46,21 @@ class LineAdjudicationInformationSVD(BaseModel):
     composite_medical_procedure_identifier_03: CompositeMedicalProcedureIdentifier
     paid_service_unit_count_05: int
 
-#duplicate
-class LineAdjudicationInformationSVDLoop(BaseModel):
-    line_adjudication_information_SVD: LineAdjudicationInformationSVD
-    line_adjustment_CAS: List[LineAdjustmentCAS]
-    line_check_or_remittance_date_DTP: DateServiceDateDTP
-
 
 class ServiceLineNumberLX(BaseModel):
     assigned_number_01: int
+
+
+# Line Check or Remittance Date
+class LineCheckOrRemittanceDateDTP(BaseModel):
+    date_time_qualifier_01: str
+    date_time_period_format_qualifier_02: str
+    adjudication_or_payment_date_03: str
+
+class LineAdjudicationInformationSVDLoop(BaseModel):
+    line_adjudication_information_SVD: LineAdjudicationInformationSVD
+    line_adjustment_CAS: Optional[List[LineAdjustmentCAS]]=None
+    line_check_or_remittance_date_DTP: Optional[LineCheckOrRemittanceDateDTP]
 
 
 class ServiceLineNumberLXLoopItem(BaseModel):
@@ -282,57 +288,10 @@ class OtherSubscriberInformationSBRLoop(BaseModel):
     other_subscriber_name_NM1_loop: Optional[OtherSubscriberNameNM1Loop]
     other_payer_name_NM1_loop: Optional[OtherPayerNameNM1Loop]
 
-# -----------------
-# Composite Medical Procedure Identifier
-#### duplicate !!!!
-class CompositeMedicalProcedureIdentifier(BaseModel):
-    product_or_service_id_qualifier_01: str
-    procedure_code_02: str
-
-
-# Diagnosis Code Pointer
-
-
-# Professional Service
-class ProfessionalServiceSV1(BaseModel):
-    composite_medical_procedure_identifier_01: CompositeMedicalProcedureIdentifier
-    #composite_medical_procedure_identifier_01: dict
-    line_item_charge_amount_02: float
-    unit_or_basis_for_measurement_code_03: str
-    service_unit_count_04: int
-    #composite_diagnosis_code_pointer_07: CompositeDiagnosisCodePointer
-    composite_diagnosis_code_pointer_07: dict
-
-# Line Adjudication Information
-#duplicate
-class LineAdjudicationInformationSVD(BaseModel):
-    other_payer_primary_identifier_01: str
-    service_line_paid_amount_02: float
-    composite_medical_procedure_identifier_03: CompositeMedicalProcedureIdentifier
-    paid_service_unit_count_05: int
-
-
-# Line Check or Remittance Date
-class LineCheckOrRemittanceDateDTP(BaseModel):
-    date_time_qualifier_01: str
-    date_time_period_format_qualifier_02: str
-    adjudication_or_payment_date_03: str
-
-
-# Line Adjudication SVD Loop
-#duplicate
-class LineAdjudicationInformationSVDLoop(BaseModel):
-    line_adjudication_information_SVD: LineAdjudicationInformationSVD
-    line_adjustment_CAS: Optional[List[LineAdjustmentCAS]]=None
-    line_check_or_remittance_date_DTP: Optional[LineCheckOrRemittanceDateDTP]
-
-    # line_adjudication_information_SVD: dict
-    # line_adjustment_CAS: dict
-    # line_check_or_remittance_date_DTP: dict
 
 
 # Service Line Number LX Loop
-class ServiceLineNumberLXLoop(BaseModel):
+class ServiceLineNumberLXLoop2(BaseModel):
     service_line_number_LX: ServiceLineNumberLX
     professional_service_SV1: ProfessionalServiceSV1
     #date_service_date_DTP: Optional[DateServiceDateDTP]
@@ -343,15 +302,17 @@ class ServiceLineNumberLXLoop(BaseModel):
     date_service_date_DTP: Optional[dict]=None
     #line_adjudication_information_SVD_loop: Optional[List[dict]]=None
 
-# Main Claim Information CLM Loop Model
+
+# Main Claim Information CLM Loop Model¸¸
 #duplicate
 class ClaimInformationCLMLoop(BaseModel):
     claim_information_CLM: ClaimInformationCLM
     health_care_diagnosis_code_HI: HealthCareDiagnosisCodeHI
     service_facility_location_name_NM1_loop: ServiceFacilityLocationNM1Loop
     rendering_provider_name_NM1_loop: RenderingProviderNM1Loop
-    other_subscriber_information_SBR_loop: Optional[List[OtherSubscriberInformationSBRLoop]]
-    service_line_number_LX_loop: Optional[List[ServiceLineNumberLXLoop]]
+    other_subscriber_information_SBR_loop: Optional[List[OtherSubscriberInformationSBRLoop]]=None
+    service_line_number_LX_loop: Optional[List[ServiceLineNumberLXLoop2]]
+
 
 # Envelope Class
 class PatientHierarchicalLevelHLLoop(BaseModel):
@@ -516,7 +477,7 @@ class PayerNameNM1Loop(BaseModel):
     payer_address_N3: PayerAddressN3
     payer_city_state_zip_code_N4: PayerCityStateZipCodeN4
 
-class ClaimInformationCLMLoop(BaseModel):
+class ClaimInformationCLMLoop2(BaseModel):
     claim_information_CLM: ClaimInformationCLM
     # health_care_diagnosis_code_HI:dict
     # referring_provider_name_NM1_loop:dict
@@ -529,7 +490,7 @@ class SubscriberHierarchicalLevelHLLoop(BaseModel):
     subscriber_information_SBR: Optional[SubscriberInformationSBR]=None
     subscriber_name_NM1_loop: SubscriberNameNM1Loop
     payer_name_NM1_loop: PayerNameNM1Loop
-    claim_information_CLM_loop: Optional[List[ClaimInformationCLMLoop]]=None
+    claim_information_CLM_loop: Optional[List[ClaimInformationCLMLoop2]]=None
     patient_hierarchical_level_HL_loop:Optional[List[PatientHierarchicalLevelHLLoop]]=None
 
 class BillingProviderHierarchicalLevelHLLoop(BaseModel):

@@ -343,7 +343,7 @@ class TestDataParsing(unittest.TestCase):
         #file_path = os.path.dirname(os.path.abspath(__file__))  #
         root_path = get_root_path()
 
-        file_path = os.path.join(str(root_path), "resources/02_837_input_json/X222-COB-claim-from-billing-provider-to-payer-b.json")
+        file_path = os.path.join(str(root_path), "resources/03_837_input_json_idets/X222-COB-claim-from-billing-provider-to-payer-b.json")
         edi_837 = self.load_edi_from_file(file_path)
         # Verify the parsed data matches expected values
         self.assertIsInstance(edi_837, Edi837Idets)

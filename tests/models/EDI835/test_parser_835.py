@@ -565,8 +565,8 @@ class TestDataParsing(unittest.TestCase):
         root_path = root_path.parent  # Get the parent of 'tests'
 
 
-        file_path = os.path.join(str(root_path), "resources/03_835_output_json/idets-multiple-claims.json")
-        #file_path = os.path.join(str(root_path), "resources/03_835_output_json/temp_str.json")
+        file_path = os.path.join(str(root_path), "resources/04_835_output_json_idets/idets-multiple-claims.json")
+        #file_path = os.path.join(str(root_path), "resources/04_835_output_json_idets/temp_str.json")
         edi_835 = self.load_edi_835_from_file(file_path)
         # Verify the parsed data matches expected values
         self.assertIsInstance(edi_835, EDI835Idets)

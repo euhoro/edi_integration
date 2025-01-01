@@ -20,7 +20,7 @@ demo - put inside an edi file - export ecton_bill and 835edi
 do smtp 
 do 5tedi demo to see what is missing
 more samples !! - default ack - test end to end
-what happens with not recognized / wrong (what percentage)
+what happens with not recognized / wrong (what percentage) - not secondary/ not 822a1 823a2 / not parsed 
 
 
 

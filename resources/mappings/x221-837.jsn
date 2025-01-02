@@ -23,10 +23,10 @@
       },
       "submitter_edi_contact_information_PER": [
         {
-          "contact_function_code_01": **."NM1-1000A_loop"[0].PER_01,
-          "submitter_contact_name_02": **."NM1-1000A_loop"[0].PER_02,
-          "communication_number_qualifier_03": **."NM1-1000A_loop"[0].PER_03,
-          "communication_number_04": **."NM1-1000A_loop"[0].PER_04
+          "contact_function_code_01": **."NM1-1000A_loop"[1].PER_01,
+          "submitter_contact_name_02": **."NM1-1000A_loop"[1].PER_02,
+          "communication_number_qualifier_03": **."NM1-1000A_loop"[1].PER_03,
+          "communication_number_04": **."NM1-1000A_loop"[1].PER_04
         }
       ]
     },
@@ -49,13 +49,13 @@
             "entity_type_qualifier_02": **."NM1-2010AB_loop"[0].NM1_02
           },
           "pay_to_address_address_N3": {
-            "pay_to_address_line_01": **."NM1-2010AB_loop"[0].N3_01,
-            "pay_to_address_line_02": **."NM1-2010AB_loop"[0].N3_02
+            "pay_to_address_line_01": **."NM1-2010AB_loop"[1].N3_01,
+            "pay_to_address_line_02": **."NM1-2010AB_loop"[1].N3_02
           },
           "pay_to_address_city_state_zip_code_N4": {
-            "pay_to_address_city_name_01": **."NM1-2010AB_loop"[0].N4_01,
-            "pay_to_address_state_code_02": **."NM1-2010AB_loop"[0].N4_02,
-            "pay_to_address_postal_zone_or_zip_code_03": **."NM1-2010AB_loop"[0].N4_03
+            "pay_to_address_city_name_01": **."NM1-2010AB_loop"[2].N4_01,
+            "pay_to_address_state_code_02": **."NM1-2010AB_loop"[2].N4_02,
+            "pay_to_address_postal_zone_or_zip_code_03": **."NM1-2010AB_loop"[2].N4_03
           }
         },
         "billing_provider_name_NM1_loop": {
@@ -68,31 +68,31 @@
             "billing_provider_identifier_09": **."NM1-2010AA_loop"[0].NM1_09
           },
           "billing_provider_address_N3": {
-            "billing_provider_address_line_01": **."NM1-2010AA_loop"[0].N3_01
+            "billing_provider_address_line_01": **."NM1-2010AA_loop"[1].N3_01
           },
           "billing_provider_city_state_zip_code_N4": {
-            "billing_provider_city_name_01": **."NM1-2010AA_loop"[0].N4_01,
-            "billing_provider_state_or_province_code_02": **."NM1-2010AA_loop"[0].N4_02,
-            "billing_provider_postal_zone_or_zip_code_03": **."NM1-2010AA_loop"[0].N4_03
+            "billing_provider_city_name_01": **."NM1-2010AA_loop"[2].N4_01,
+            "billing_provider_state_or_province_code_02": **."NM1-2010AA_loop"[2].N4_02,
+            "billing_provider_postal_zone_or_zip_code_03": **."NM1-2010AA_loop"[2].N4_03
           },
           "billing_provider_tax_identification_REF": {
-            "reference_identification_qualifier_01": **."NM1-2010AA_loop"[0].REF_01,
-            "billing_provider_tax_identification_number_02": **."NM1-2010AA_loop"[0].REF_02
+            "reference_identification_qualifier_01": **."NM1-2010AA_loop"[3].REF_01,
+            "billing_provider_tax_identification_number_02": **."NM1-2010AA_loop"[3].REF_02
           },
           "billing_provider_contact_information_PER": [
             {
-              "contact_function_code_01": **."NM1-2010AA_loop"[0].PER_01,
-              "billing_provider_contact_name_02": **."NM1-2010AA_loop"[0].PER_02,
-              "communication_number_qualifier_03": **."NM1-2010AA_loop"[0].PER_03,
-              "communication_number_04": **."NM1-2010AA_loop"[0].PER_04
+              "contact_function_code_01": **."NM1-2010AA_loop"[4].PER_01,
+              "billing_provider_contact_name_02": **."NM1-2010AA_loop"[4].PER_02,
+              "communication_number_qualifier_03": **."NM1-2010AA_loop"[4].PER_03,
+              "communication_number_04": **."NM1-2010AA_loop"[4].PER_04
             }
           ]
         },
         "subscriber_hierarchical_level_HL_loop": [
           {
             "subscriber_information_SBR": {
-              "payer_responsibility_sequence_number_code_01": **."HL-2000B_loop"[0].SBR_01,
-              "claim_filing_indicator_code_09": **."HL-2000B_loop"[0].SBR_09
+              "payer_responsibility_sequence_number_code_01": **."HL-2000B_loop"[1].SBR_01,
+              "claim_filing_indicator_code_09": **."HL-2000B_loop"[1].SBR_09
             },
             "payer_name_NM1_loop": {
               "payer_name_NM1": {
@@ -103,17 +103,17 @@
                 "payer_identifier_09": **."NM1-2010BB_loop"[0].NM1_09
               },
               "payer_address_N3": {
-                "payer_address_line_01": **."NM1-2010BB_loop"[0].N3_01
+                "payer_address_line_01": **."NM1-2010BB_loop"[1].N3_01
               },
               "payer_city_state_zip_code_N4": {
-                "payer_city_name_01": **."NM1-2010BB_loop"[0].N4_01,
-                "payer_state_or_province_code_02": **."NM1-2010BB_loop"[0].N4_02,
-                "payer_postal_zone_or_zip_code_03": **."NM1-2010BB_loop"[0].N4_03
+                "payer_city_name_01": **."NM1-2010BB_loop"[2].N4_01,
+                "payer_state_or_province_code_02": **."NM1-2010BB_loop"[2].N4_02,
+                "payer_postal_zone_or_zip_code_03": **."NM1-2010BB_loop"[2].N4_03
               },
               "billing_provider_secondary_identification_REF": [
                 {
-                  "reference_identification_qualifier_01": **."NM1-2010BB_loop"[0].REF_01,
-                  "billing_provider_secondary_identifier_02": **."NM1-2010BB_loop"[0].REF_02
+                  "reference_identification_qualifier_01": **."NM1-2010BB_loop"[3].REF_01,
+                  "billing_provider_secondary_identifier_02": **."NM1-2010BB_loop"[3].REF_02
                 }
               ]
             },
@@ -127,15 +127,15 @@
                 "subscriber_primary_identifier_09": **."NM1-2010BA_loop"[0].NM1_09
               },
               "subscriber_demographic_information_DMG": {
-                "date_time_period_format_qualifier_01": **."NM1-2010BA_loop"[0].DMG_01,
-                "subscriber_birth_date_02": **."NM1-2010BA_loop"[0].DMG_02,
-                "subscriber_gender_code_03": **."NM1-2010BA_loop"[0].DMG_03
+                "date_time_period_format_qualifier_01": **."NM1-2010BA_loop"[1].DMG_01,
+                "subscriber_birth_date_02": **."NM1-2010BA_loop"[1].DMG_02,
+                "subscriber_gender_code_03": **."NM1-2010BA_loop"[1].DMG_03
               }
             },
             "patient_hierarchical_level_HL_loop": [
               {
                 "patient_information_PAT": {
-                  "individual_relationship_code_01": **."HL-2000C_loop"[0].PAT_01
+                  "individual_relationship_code_01": **."HL-2000C_loop"[1].PAT_01
                 },
                 "patient_name_NM1_loop": {
                   "patient_name_NM1": {
@@ -145,17 +145,17 @@
                     "patient_first_name_04": **."NM1-2010CA_loop"[0].NM1_04
                   },
                   "patient_address_N3": {
-                    "patient_address_line_01": **."NM1-2010CA_loop"[0].N3_01
+                    "patient_address_line_01": **."NM1-2010CA_loop"[1].N3_01
                   },
                   "patient_city_state_zip_code_N4": {
-                    "patient_city_name_01": **."NM1-2010CA_loop"[0].N4_01,
-                    "patient_state_code_02": **."NM1-2010CA_loop"[0].N4_02,
-                    "patient_postal_zone_or_zip_code_03": **."NM1-2010CA_loop"[0].N4_03
+                    "patient_city_name_01": **."NM1-2010CA_loop"[2].N4_01,
+                    "patient_state_code_02": **."NM1-2010CA_loop"[2].N4_02,
+                    "patient_postal_zone_or_zip_code_03": **."NM1-2010CA_loop"[2].N4_03
                   },
                   "patient_demographic_information_DMG": {
-                    "date_time_period_format_qualifier_01": **."NM1-2010CA_loop"[0].DMG_01,
-                    "patient_birth_date_02": **."NM1-2010CA_loop"[0].DMG_02,
-                    "patient_gender_code_03": **."NM1-2010CA_loop"[0].DMG_03
+                    "date_time_period_format_qualifier_01": **."NM1-2010CA_loop"[3].DMG_01,
+                    "patient_birth_date_02": **."NM1-2010CA_loop"[3].DMG_02,
+                    "patient_gender_code_03": **."NM1-2010CA_loop"[3].DMG_03
                   }
                 },
                 "claim_information_CLM_loop": [
@@ -175,20 +175,20 @@
                     },
                     "health_care_diagnosis_code_HI": {
                       "health_care_code_information_01": {
-                        "diagnosis_type_code_01": **."CLM-2300_loop"[0].HI_01.HI_01_01,
-                        "diagnosis_code_02": **."CLM-2300_loop"[0].HI_01.HI_01_02
+                        "diagnosis_type_code_01": **."CLM-2300_loop"[1].HI_01.HI_01_01,
+                        "diagnosis_code_02": **."CLM-2300_loop"[1].HI_01.HI_01_02
                       },
                       "health_care_code_information_02": {
-                        "diagnosis_type_code_01": **."CLM-2300_loop"[0].HI_02.HI_02_01,
-                        "diagnosis_code_02": **."CLM-2300_loop"[0].HI_02.HI_02_02
+                        "diagnosis_type_code_01": **."CLM-2300_loop"[1].HI_02.HI_02_01,
+                        "diagnosis_code_02": **."CLM-2300_loop"[1].HI_02.HI_02_02
                       },
                       "health_care_code_information_03": {
-                        "diagnosis_type_code_01": **."CLM-2300_loop"[0].HI_03.HI_03_01,
-                        "diagnosis_code_02": **."CLM-2300_loop"[0].HI_03.HI_03_02
+                        "diagnosis_type_code_01": **."CLM-2300_loop"[1].HI_03.HI_03_01,
+                        "diagnosis_code_02": **."CLM-2300_loop"[1].HI_03.HI_03_02
                       },
                       "health_care_code_information_04": {
-                        "diagnosis_type_code_01": **."CLM-2300_loop"[0].HI_04.HI_04_01,
-                        "diagnosis_code_02": **."CLM-2300_loop"[0].HI_04.HI_04_02
+                        "diagnosis_type_code_01": **."CLM-2300_loop"[1].HI_04.HI_04_01,
+                        "diagnosis_code_02": **."CLM-2300_loop"[1].HI_04.HI_04_02
                       }
                     },
                     "rendering_provider_name_NM1_loop": {
@@ -200,14 +200,14 @@
                         "rendering_provider_identifier_09": **."NM1-2310B_loop"[0].NM1_09
                       },
                       "rendering_provider_specialty_information_PRV": {
-                        "provider_code_01": **."NM1-2310B_loop"[0].PRV_01,
-                        "reference_identification_qualifier_02": **."NM1-2310B_loop"[0].PRV_02,
-                        "provider_taxonomy_code_03": **."NM1-2310B_loop"[0].PRV_03
+                        "provider_code_01": **."NM1-2310B_loop"[1].PRV_01,
+                        "reference_identification_qualifier_02": **."NM1-2310B_loop"[1].PRV_02,
+                        "provider_taxonomy_code_03": **."NM1-2310B_loop"[1].PRV_03
                       },
                       "rendering_provider_secondary_identification_REF": [
                         {
-                          "reference_identification_qualifier_01": **."NM1-2310B_loop"[0].REF_01,
-                          "rendering_provider_secondary_identifier_02": **."NM1-2310B_loop"[0].REF_02
+                          "reference_identification_qualifier_01": **."NM1-2310B_loop"[2].REF_01,
+                          "rendering_provider_secondary_identifier_02": **."NM1-2310B_loop"[2].REF_02
                         }
                       ]
                     },
@@ -220,12 +220,12 @@
                         "laboratory_or_facility_primary_identifier_09": **."NM1-2310C_loop"[0].NM1_09
                       },
                       "service_facility_location_address_N3": {
-                        "laboratory_or_facility_address_line_01": **."NM1-2310C_loop"[0].N3_01
+                        "laboratory_or_facility_address_line_01": **."NM1-2310C_loop"[1].N3_01
                       },
                       "service_facility_location_city_state_zip_code_N4": {
-                        "laboratory_or_facility_city_name_01": **."NM1-2310C_loop"[0].N4_01,
-                        "laboratory_or_facility_state_or_province_code_02": **."NM1-2310C_loop"[0].N4_02,
-                        "laboratory_or_facility_postal_zone_or_zip_code_03": **."NM1-2310C_loop"[0].N4_03
+                        "laboratory_or_facility_city_name_01": **."NM1-2310C_loop"[2].N4_01,
+                        "laboratory_or_facility_state_or_province_code_02": **."NM1-2310C_loop"[2].N4_02,
+                        "laboratory_or_facility_postal_zone_or_zip_code_03": **."NM1-2310C_loop"[2].N4_03
                       }
                     },
                     "other_subscriber_information_SBR_loop": [
@@ -237,25 +237,25 @@
                         },
                         "claim_level_adjustments_CAS": [
                           {
-                            "claim_adjustment_group_code_01": **."SBR-2320_loop"[0].CAS_01,
-                            "adjustment_reason_code_02": **."SBR-2320_loop"[0].CAS_02,
-                            "adjustment_amount_03": $number(**."SBR-2320_loop"[0].CAS_03),
-                            "adjustment_reason_code_05": **."SBR-2320_loop"[0].CAS_05,
-                            "adjustment_amount_06": $number(**."SBR-2320_loop"[0].CAS_06)
+                            "claim_adjustment_group_code_01": **."SBR-2320_loop"[1].CAS_01,
+                            "adjustment_reason_code_02": **."SBR-2320_loop"[1].CAS_02,
+                            "adjustment_amount_03": $number(**."SBR-2320_loop"[1].CAS_03),
+                            "adjustment_reason_code_05": **."SBR-2320_loop"[1].CAS_05,
+                            "adjustment_amount_06": $number(**."SBR-2320_loop"[1].CAS_06)
                           }
                         ],
                         "coordination_of_benefits_cob_payer_paid_amount_AMT": {
-                          "amount_qualifier_code_01": **."SBR-2320_loop"[0].AMT[AMT_01="D"].AMT_01,
-                          "payer_paid_amount_02": $number(**."SBR-2320_loop"[0].AMT[AMT_01="D"].AMT_02)
+                          "amount_qualifier_code_01": **."SBR-2320_loop"[2].AMT_01,
+                          "payer_paid_amount_02": $number(**."SBR-2320_loop"[2].AMT_02)
                         },
                         "remaining_patient_liability_AMT": {
-                          "amount_qualifier_code_01": **."SBR-2320_loop"[0].AMT[AMT_01="EAF"].AMT_01,
-                          "remaining_patient_liability_02": $number(**."SBR-2320_loop"[0].AMT[AMT_01="EAF"].AMT_02)
+                          "amount_qualifier_code_01": **."SBR-2320_loop"[3].AMT_01,
+                          "remaining_patient_liability_02": $number(**."SBR-2320_loop"[3].AMT_02)
                         },
                         "other_insurance_coverage_information_OI": {
-                          "benefits_assignment_certification_indicator_03": **."SBR-2320_loop"[0].OI_03,
-                          "patient_signature_source_code_04": **."SBR-2320_loop"[0].OI_04,
-                          "release_of_information_code_06": **."SBR-2320_loop"[0].OI_06
+                          "benefits_assignment_certification_indicator_03": **."SBR-2320_loop"[4].OI_03,
+                          "patient_signature_source_code_04": **."SBR-2320_loop"[4].OI_04,
+                          "release_of_information_code_06": **."SBR-2320_loop"[4].OI_06
                         },
                         "other_subscriber_name_NM1_loop": {
                           "other_subscriber_name_NM1": {
@@ -267,12 +267,12 @@
                             "other_insured_identifier_09": **."NM1-2330A_loop"[0].NM1_09
                           },
                           "other_subscriber_address_N3": {
-                            "other_subscriber_address_line_01": **."NM1-2330A_loop"[0].N3_01
+                            "other_subscriber_address_line_01": **."NM1-2330A_loop"[1].N3_01
                           },
                           "other_subscriber_city_state_zip_code_N4": {
-                            "other_subscriber_city_name_01": **."NM1-2330A_loop"[0].N4_01,
-                            "other_subscriber_state_or_province_code_02": **."NM1-2330A_loop"[0].N4_02,
-                            "other_subscriber_postal_zone_or_zip_code_03": **."NM1-2330A_loop"[0].N4_03
+                            "other_subscriber_city_name_01": **."NM1-2330A_loop"[2].N4_01,
+                            "other_subscriber_state_or_province_code_02": **."NM1-2330A_loop"[2].N4_02,
+                            "other_subscriber_postal_zone_or_zip_code_03": **."NM1-2330A_loop"[2].N4_03
                           }
                         },
                         "other_payer_name_NM1_loop": {

@@ -22,7 +22,12 @@
         "submitter_identifier_09": "12EEER 000TY"
       },
       "submitter_edi_contact_information_PER": [
-        {}
+        {
+          "contact_function_code_01": "IC",
+          "submitter_contact_name_02": "JERRY",
+          "communication_number_qualifier_03": "TE",
+          "communication_number_04": "3055552222"
+        }
       ]
     },
     "receiver_name_NM1_loop": {
@@ -43,8 +48,15 @@
             "entity_identifier_code_01": "87",
             "entity_type_qualifier_02": "2"
           },
-          "pay_to_address_address_N3": {},
-          "pay_to_address_city_state_zip_code_N4": {}
+          "pay_to_address_address_N3": {
+            "pay_to_address_line_01": "2345",
+            "pay_to_address_line_02": "OCEAN BLVD"
+          },
+          "pay_to_address_city_state_zip_code_N4": {
+            "pay_to_address_city_name_01": "MIAMI",
+            "pay_to_address_state_code_02": "FL",
+            "pay_to_address_postal_zone_or_zip_code_03": "3111"
+          }
         },
         "billing_provider_name_NM1_loop": {
           "billing_provider_name_NM1": {
@@ -55,16 +67,33 @@
             "identification_code_qualifier_08": "XX",
             "billing_provider_identifier_09": "1999996666"
           },
-          "billing_provider_address_N3": {},
-          "billing_provider_city_state_zip_code_N4": {},
-          "billing_provider_tax_identification_REF": {},
+          "billing_provider_address_N3": {
+            "billing_provider_address_line_01": "1234SEAWAY ST"
+          },
+          "billing_provider_city_state_zip_code_N4": {
+            "billing_provider_city_name_01": "MIAMI",
+            "billing_provider_state_or_province_code_02": "FL",
+            "billing_provider_postal_zone_or_zip_code_03": "33111"
+          },
+          "billing_provider_tax_identification_REF": {
+            "reference_identification_qualifier_01": "EI",
+            "billing_provider_tax_identification_number_02": "123456789"
+          },
           "billing_provider_contact_information_PER": [
-            {}
+            {
+              "contact_function_code_01": "IC",
+              "billing_provider_contact_name_02": "CONNIE",
+              "communication_number_qualifier_03": "TE",
+              "communication_number_04": "3055551234"
+            }
           ]
         },
         "subscriber_hierarchical_level_HL_loop": [
           {
-            "subscriber_information_SBR": {},
+            "subscriber_information_SBR": {
+              "payer_responsibility_sequence_number_code_01": "S",
+              "claim_filing_indicator_code_09": "CI"
+            },
             "payer_name_NM1_loop": {
               "payer_name_NM1": {
                 "entity_identifier_code_01": "PR",
@@ -73,10 +102,19 @@
                 "identification_code_qualifier_08": "PI",
                 "payer_identifier_09": "567890"
               },
-              "payer_address_N3": {},
-              "payer_city_state_zip_code_N4": {},
+              "payer_address_N3": {
+                "payer_address_line_01": "4456 SOUTH SHORE BLVD"
+              },
+              "payer_city_state_zip_code_N4": {
+                "payer_city_name_01": "CHICAGO",
+                "payer_state_or_province_code_02": "IL",
+                "payer_postal_zone_or_zip_code_03": "44444"
+              },
               "billing_provider_secondary_identification_REF": [
-                {}
+                {
+                  "reference_identification_qualifier_01": "G2",
+                  "billing_provider_secondary_identifier_02": "567890"
+                }
               ]
             },
             "subscriber_name_NM1_loop": {
@@ -88,11 +126,17 @@
                 "identification_code_qualifier_08": "MI",
                 "subscriber_primary_identifier_09": "222334444"
               },
-              "subscriber_demographic_information_DMG": {}
+              "subscriber_demographic_information_DMG": {
+                "date_time_period_format_qualifier_01": "D8",
+                "subscriber_birth_date_02": "19431022",
+                "subscriber_gender_code_03": "M"
+              }
             },
             "patient_hierarchical_level_HL_loop": [
               {
-                "patient_information_PAT": {},
+                "patient_information_PAT": {
+                  "individual_relationship_code_01": "19"
+                },
                 "patient_name_NM1_loop": {
                   "patient_name_NM1": {
                     "entity_identifier_code_01": "QC",
@@ -100,9 +144,19 @@
                     "patient_last_name_03": "SMITH",
                     "patient_first_name_04": "TED"
                   },
-                  "patient_address_N3": {},
-                  "patient_city_state_zip_code_N4": {},
-                  "patient_demographic_information_DMG": {}
+                  "patient_address_N3": {
+                    "patient_address_line_01": "236 N MAIN ST"
+                  },
+                  "patient_city_state_zip_code_N4": {
+                    "patient_city_name_01": "MIAMI",
+                    "patient_state_code_02": "FL",
+                    "patient_postal_zone_or_zip_code_03": "33413"
+                  },
+                  "patient_demographic_information_DMG": {
+                    "date_time_period_format_qualifier_01": "D8",
+                    "patient_birth_date_02": "19730501",
+                    "patient_gender_code_03": "M"
+                  }
                 },
                 "claim_information_CLM_loop": [
                   {
@@ -120,10 +174,22 @@
                       "release_of_information_code_09": "I"
                     },
                     "health_care_diagnosis_code_HI": {
-                      "health_care_code_information_01": {},
-                      "health_care_code_information_02": {},
-                      "health_care_code_information_03": {},
-                      "health_care_code_information_04": {}
+                      "health_care_code_information_01": {
+                        "diagnosis_type_code_01": "BK",
+                        "diagnosis_code_02": "4779"
+                      },
+                      "health_care_code_information_02": {
+                        "diagnosis_type_code_01": "BF",
+                        "diagnosis_code_02": "2724"
+                      },
+                      "health_care_code_information_03": {
+                        "diagnosis_type_code_01": "BF",
+                        "diagnosis_code_02": "2780"
+                      },
+                      "health_care_code_information_04": {
+                        "diagnosis_type_code_01": "BF",
+                        "diagnosis_code_02": "53081"
+                      }
                     },
                     "rendering_provider_name_NM1_loop": {
                       "rendering_provider_name_NM1": {
@@ -134,9 +200,16 @@
                         "identification_code_qualifier_08": "XX",
                         "rendering_provider_identifier_09": "1999996666"
                       },
-                      "rendering_provider_specialty_information_PRV": {},
+                      "rendering_provider_specialty_information_PRV": {
+                        "provider_code_01": "PE",
+                        "reference_identification_qualifier_02": "PXC",
+                        "provider_taxonomy_code_03": "204C00000X"
+                      },
                       "rendering_provider_secondary_identification_REF": [
-                        {}
+                        {
+                          "reference_identification_qualifier_01": "G2",
+                          "rendering_provider_secondary_identifier_02": "88877"
+                        }
                       ]
                     },
                     "service_facility_location_name_NM1_loop": {
@@ -147,8 +220,14 @@
                         "identification_code_qualifier_08": "XX",
                         "laboratory_or_facility_primary_identifier_09": "1581234567"
                       },
-                      "service_facility_location_address_N3": {},
-                      "service_facility_location_city_state_zip_code_N4": {}
+                      "service_facility_location_address_N3": {
+                        "laboratory_or_facility_address_line_01": "2345 OCEAN BLVD"
+                      },
+                      "service_facility_location_city_state_zip_code_N4": {
+                        "laboratory_or_facility_city_name_01": "MIAMI",
+                        "laboratory_or_facility_state_or_province_code_02": "FL",
+                        "laboratory_or_facility_postal_zone_or_zip_code_03": "33111"
+                      }
                     },
                     "other_subscriber_information_SBR_loop": [
                       {
@@ -158,11 +237,27 @@
                           "claim_filing_indicator_code_09": "CI"
                         },
                         "claim_level_adjustments_CAS": [
-                          {}
+                          {
+                            "claim_adjustment_group_code_01": "PR",
+                            "adjustment_reason_code_02": "1",
+                            "adjustment_amount_03": 21.89,
+                            "adjustment_reason_code_05": "2",
+                            "adjustment_amount_06": 15
+                          }
                         ],
-                        "coordination_of_benefits_cob_payer_paid_amount_AMT": {},
-                        "remaining_patient_liability_AMT": {},
-                        "other_insurance_coverage_information_OI": {},
+                        "coordination_of_benefits_cob_payer_paid_amount_AMT": {
+                          "amount_qualifier_code_01": "D",
+                          "payer_paid_amount_02": 39.15
+                        },
+                        "remaining_patient_liability_AMT": {
+                          "amount_qualifier_code_01": "EAF",
+                          "remaining_patient_liability_02": 36.89
+                        },
+                        "other_insurance_coverage_information_OI": {
+                          "benefits_assignment_certification_indicator_03": "Y",
+                          "patient_signature_source_code_04": "P",
+                          "release_of_information_code_06": "Y"
+                        },
                         "other_subscriber_name_NM1_loop": {
                           "other_subscriber_name_NM1": {
                             "entity_identifier_code_01": "IL",
@@ -172,8 +267,14 @@
                             "identification_code_qualifier_08": "MI",
                             "other_insured_identifier_09": "JS00111223333"
                           },
-                          "other_subscriber_address_N3": {},
-                          "other_subscriber_city_state_zip_code_N4": {}
+                          "other_subscriber_address_N3": {
+                            "other_subscriber_address_line_01": "236 N MAIN ST"
+                          },
+                          "other_subscriber_city_state_zip_code_N4": {
+                            "other_subscriber_city_name_01": "MIAMI",
+                            "other_subscriber_state_or_province_code_02": "FL",
+                            "other_subscriber_postal_zone_or_zip_code_03": "33111"
+                          }
                         },
                         "other_payer_name_NM1_loop": {
                           "other_payer_name_NM1": {

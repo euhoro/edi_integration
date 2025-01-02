@@ -134,17 +134,36 @@ Map the needed fields to create a proper 835 for the given 837 ( 100 %)
 
 ## Next Steps
 1. **Enhance Field Mapping**: Improve field mapping and validations.
-2. **Expand Testing**: Include additional scenarios and edge cases.
-3. **Finalize Demo**: Complete and test the demo setup.
-4. **SMTP Integration**: Configure email settings for clearing house communication.
-5. **Coherent Example**: Make one example instead of 2 ( one for import one for export )
-6. **Fix EctonBill**: Collect feedback (one line item - multiple adjustments with codes and percentage or amount )
+2. **Coherent Example**: Make one example instead of 2 ( one for import one for export )
+3. **Fix EctonBill**: Collect feedback (one line item - multiple adjustments with codes and percentage or amount )
+4. **Finalize Demo**: Complete and test the demo setup.
+
+5. **Expand Testing**: Include additional scenarios and edge cases.
+6. **SMTP Integration**: Configure email settings for clearing house communication.
 7. **STEDI DEMO**: Conduct evaluation
 
 8. **Check other files **: x223
 9. **Create Enums from schema **: (no referring provider )
 
+
 ----------------------------
+focus on : 
+
+mapping 
+variants ???
+835 from 837 ( check if we have all the data / check what will store in the DB ) 
+
+is claim valid to process ? 
+what user can do - > 
+   autopay 
+   no autopay 
+   
+-----------------
+   835 paid in multiple instalments
+   835 won't pay (reject)
+   835 paid 
+-----------------
+-----------------
 Questions
 
 what happens when not valid 

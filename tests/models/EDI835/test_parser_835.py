@@ -565,14 +565,11 @@ class TestDataParsing(unittest.TestCase):
         root_path = root_path.parent  # Get the parent of 'tests'
 
 
-        file_path = os.path.join(str(root_path), "resources/04_835_output_json_idets/idets-multiple-claims.json")
-        #file_path = os.path.join(str(root_path), "resources/04_835_output_json_idets/temp_str.json")
+        file_path = os.path.join(str(root_path), "resources/f04_835_output_json_idets/idets-multiple-claims.json")
+        #file_path = os.path.join(str(root_path), "resources/f04_835_output_json_idets/temp_str.json")
         edi_835 = self.load_edi_835_from_file(file_path)
-        # Verify the parsed data matches expected values
         self.assertIsInstance(edi_835, EDI835Idets)
-        # self.assertEqual(edi_837.name, "John Doe")
-        # self.assertEqual(edi_837.age, 30)
-        # self.assertEqual(edi_837.city, "New York")
+
 
 
     def test_parse_edi_835_with_temp_file(self):

@@ -26,31 +26,142 @@ Extract and create a Bill object (patient, provider, origin amount, amount left,
 Map the needed fields to create a proper 835 for the given 837 ( 100 %)
    - TBD
    ---what happens when not valid 
-   ---rejecct instead of ack ? 
+   ---reject instead of ack ? 
 
-ecton_bill_to_835    OR      idets-837-json to ecton_bill
-what will happen when x223 received ? secondary claim ? ( maybe in clearing house)
 
-demo - put inside an edi file - export ecton_bill and 835edi
-60% - 70%
+---
 
-do smtp ( clearing house settings )
+## Missing Components
 
-do 5tedi demo to see what is missing ????
+1. **Important Fields from JSON**
+   - Understand the significant fields based on partner settings.
+   - Extract and create a `Bill` object including:
+     - Patient
+     - Provider
+     - Origin amount
+     - Amount left
+     - Due date
+     - Other relevant fields to represent a bill.
 
-more samples !! - default ack - test end to end 
+2. **Field Mapping**
+   - Map fields to create a proper `835` for the given `837`.
+   - Handle invalid scenarios:
+     - Reject instead of acknowledgment?
+
+3. **Secondary Claims**
+   - What happens when `x223` is received? 
+   - Handle secondary claims (e.g., in clearing house).
+
+4. **Demo Workflow**
+   - Input an EDI file.
+   - Export `ecton_bill` and `835edi`.
+   - Progress: 60%-70%.
+
+5. **SMTP Integration**
+   - Add settings for clearing house email communication.
+
+6. **Sample Testing**
+   - Add more samples.
+   - Test end-to-end workflows.
+   - Handle unrecognized or incorrect cases:
+     - Invalid versions (e.g., not `822a1`, `823a2`).
+     - Non-parsed or non-HIPAA-compliant cases.
+
+---
+
+## Validation Requirements
+
+### Enum Checks
+- Validate codes and schema:
+  - No referring provider.
+  - Single line item with multiple adjustments (codes + percentage or amount).
+- Double-check `298`, `299`, `222`, and `223` without version.
+
+### Version-Specific Checks
+- Validate `x222a1` and `x223a1`.
+
+---
+
+## Partner Configuration
+
+### Profile Details
+- **Profile Name**: `eugen_off`
+- **Business Name**: `eugen_part@eugen_part.com`
+- **Primary Contact**: `eugen_comp`
+- **Primary Phone**: `15558912457`
+
+### Partner (Clearing House) Details
+- **Name**: `eugen_part`
+- **Email**: `eugen_part@eugen_part.com`
+
+---
+
+## Interchange Header Settings
+
+### ISA Settings
+- **ISA 05**: Sender Qualifier - `15` (Options: `01`, `02`, `37`, `AM`, `NR`, `SN`, `ZZ`).
+- **ISA 06**: Sender ID - `666666666666666` (15 chars).
+- **ISA 07**: Receiver Qualifier - `17` (Options: `01`, `02`, `37`, `AM`, `NR`, `SN`, `ZZ`).
+- **ISA 11**: Repetition Separator - `888888888888888` (15 chars).
+- **ISA 14**: Acknowledgement Requested - `1` (`0` or `1`).
+- **ISA 15**: Usage Indicator - `I` (`I`, `T`, `P`).
+
+---
+
+## Functional Group Settings
+
+### GS Settings
+- **GS 02**: Application Sender Code - `0022` (Length: 2-16).
+- **GS 03**: Application Receiver Code - `0033` (Length: 2-16).
+- **GS 07**: Agency Code - `X` (`X`, `T`).
+
+---
+
+## Additional Details
+
+### Separators
+- **Component Separator**: `:`
+- **Data Element Separator**: `*`
+- **Segment Terminator**: `$`
+
+### Validations
+- EDI Validations Enabled: `TRUE`
+
+### Trading Capabilities
+- Supports: `835 HIPAA`, `837 HIPAA`
+
+---
+
+## Next Steps
+1. **Enhance Field Mapping**: Improve field mapping and validations.
+2. **Expand Testing**: Include additional scenarios and edge cases.
+3. **Finalize Demo**: Complete and test the demo setup.
+4. **SMTP Integration**: Configure email settings for clearing house communication.
+5. **Coherent Example**: Make one example instead of 2 ( one for import one for export )
+6. **Fix EctonBill**: Collect feedback (one line item - multiple adjustments with codes and percentage or amount )
+7. **STEDI DEMO**: Conduct evaluation
+
+8. **Check other files **: x223
+9. **Create Enums from schema **: (no referring provider )
+
+----------------------------
+Questions
+
+what happens when not valid 
+what happens when checked -Enable Validation
+what is the file next to 999 and how does it look if rejected 
+what happens if non secondary claim
+how the BUSINESS LOGIC (spider) will look like 
+what happens with not recognized / wrong (what percentage) - not secondary/ not 822a1 823a2 / not parsed / not hippa /
+more samples 
+298 299 double check
+222 and 223 without version double check
 what happens with not recognized / wrong (what percentage) - not secondary/ not 822a1 823a2 / not parsed / not hippa / 
-
-
-ENUM FROM CODES AND SCHEMA
-(no reffering provider )
-(one line item - multiple adjustments with codes and percentage or amount )
-
 298 299 double check 
-
 222 and 223 without version double check 
 
-x222a1 x222a1 double checking 
+mapping 837 :
+---------------
 
 profile_name                    :   eugen_off
 business_name                   :   eugen_part@eugen_part.com

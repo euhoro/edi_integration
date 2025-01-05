@@ -240,3 +240,24 @@ primary_phone                   :   15558912457
 #SQLFluff #dbt #DataEngineering #LintAllTheThings
 
 
+  /* 1) Declare a variable for easy access to the "LX-2400_loop" array */
+  $arr := **."LX-2400_loop";
+
+                    "service_line_number_LX_loop": {
+                      "service_line_number_LX": {
+                        "assigned_number_01":$number($arr[0].LX_01)
+                            
+                      },
+                      "professional_service_SV1": {
+                        "composite_medical_procedure_identifier_01": {
+                          "product_or_service_id_qualifier_01": $arr[1].SV1_01.SV1_01_01,
+                          "procedure_code_02": $arr[1].SV1_01.SV1_01_02
+                        },
+                    "date_service_date_DTP": {
+                        "date_time_qualifier_01": $arr[2].DTP_01,
+                        "date_time_period_format_qualifier_02": $arr[2].DTP_02,
+                        "service_date_03": $arr[2].DTP_03
+                      },
+
+user stories 
+tasks !

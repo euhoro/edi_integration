@@ -1,0 +1,136 @@
+{
+   "service_line_number_LX_loop": [
+      {
+         "service_line_number_LX": {
+            "assigned_number_01": 1
+         },
+         "professional_service_SV1": {
+            "composite_medical_procedure_identifier_01": {
+               "product_or_service_id_qualifier_01": "HC",
+               "procedure_code_02": "99213"
+            },
+            "line_item_charge_amount_02": 43,
+            "unit_or_basis_for_measurement_code_03": "UN",
+            "service_unit_count_04": 1,
+            "composite_diagnosis_code_pointer_07": {
+               "diagnosis_code_pointer_01": 1,
+               "diagnosis_code_pointer_02": 2,
+               "diagnosis_code_pointer_03": 3,
+               "diagnosis_code_pointer_04": 4
+            }
+         },
+         "date_service_date_DTP": {
+            "date_time_qualifier_01": "472",
+            "date_time_period_format_qualifier_02": "D8",
+            "service_date_03": "20051003"
+         },
+         "line_adjudication_information_SVD_loop": [
+            {
+               "line_adjudication_information_SVD": {
+                  "other_payer_primary_identifier_01": "999996666",
+                  "service_line_paid_amount_02": 40,
+                  "composite_medical_procedure_identifier_03": {
+                     "product_or_service_id_qualifier_01": "HC",
+                     "procedure_code_02": "99213"
+                  },
+                  "paid_service_unit_count_05": 1
+               },
+               "line_adjustment_CAS": [
+                  {
+                     "claim_adjustment_group_code_01": "CO",
+                     "adjustment_reason_code_02": "42",
+                     "adjustment_amount_03": 3
+                  }
+               ],
+               "line_check_or_remittance_date_DTP": {
+                  "date_time_qualifier_01": "573",
+                  "date_time_period_format_qualifier_02": "D8",
+                  "adjudication_or_payment_date_03": "20051015"
+               }
+            }
+         ]
+      },
+      {
+         "service_line_number_LX": {
+            "assigned_number_01": 2
+         },
+         "professional_service_SV1": {
+            "composite_medical_procedure_identifier_01": {
+               "product_or_service_id_qualifier_01": "HC",
+               "procedure_code_02": "90782"
+            },
+            "line_item_charge_amount_02": 15,
+            "unit_or_basis_for_measurement_code_03": "UN",
+            "service_unit_count_04": 1,
+            "composite_diagnosis_code_pointer_07": {
+               "diagnosis_code_pointer_01": 1,
+               "diagnosis_code_pointer_02": 2
+            }
+         },
+         "date_service_date_DTP": {
+            "date_time_qualifier_01": "472",
+            "date_time_period_format_qualifier_02": "D8",
+            "service_date_03": "20051003"
+         },
+         "line_adjudication_information_SVD_loop": [
+            {
+               "line_adjudication_information_SVD": {
+                  "other_payer_primary_identifier_01": "999996666",
+                  "service_line_paid_amount_02": 15,
+                  "composite_medical_procedure_identifier_03": {
+                     "product_or_service_id_qualifier_01": "HC",
+                     "procedure_code_02": "90782"
+                  },
+                  "paid_service_unit_count_05": 1
+               },
+               "line_check_or_remittance_date_DTP": {
+                  "date_time_qualifier_01": "573",
+                  "date_time_period_format_qualifier_02": "D8",
+                  "adjudication_or_payment_date_03": "20051015"
+               }
+            }
+         ]
+      },
+      {
+         "service_line_number_LX": {
+            "assigned_number_01": 3
+         },
+         "professional_service_SV1": {
+            "composite_medical_procedure_identifier_01": {
+               "product_or_service_id_qualifier_01": "HC",
+               "procedure_code_02": "J3301"
+            },
+            "line_item_charge_amount_02": 21.04,
+            "unit_or_basis_for_measurement_code_03": "UN",
+            "service_unit_count_04": 1,
+            "composite_diagnosis_code_pointer_07": {
+               "diagnosis_code_pointer_01": 1,
+               "diagnosis_code_pointer_02": 2
+            }
+         },
+         "date_service_date_DTP": {
+            "date_time_qualifier_01": "472",
+            "date_time_period_format_qualifier_02": "D8",
+            "service_date_03": "20051003"
+         },
+         "line_adjudication_information_SVD_loop": [
+            {
+               "line_adjudication_information_SVD": {
+                  "other_payer_primary_identifier_01": "999996666",
+                  "service_line_paid_amount_02": 21.04,
+                  "composite_medical_procedure_identifier_03": {
+                     "product_or_service_id_qualifier_01": "HC",
+                     "procedure_code_02": "J3301"
+                  },
+                  "paid_service_unit_count_05": 1
+               },
+               "line_check_or_remittance_date_DTP": {
+                  "date_time_qualifier_01": "573",
+                  "date_time_period_format_qualifier_02": "D8",
+                  "adjudication_or_payment_date_03": "20051015"
+               }
+            }
+         ]
+      }
+   ]
+}

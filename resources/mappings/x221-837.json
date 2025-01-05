@@ -1,4 +1,8 @@
-{
+(
+  /* 1) Declare a variable for easy access to the "LX-2400_loop" array */
+  $lx2400loop := **."LX-2400_loop";
+  
+  {
   "heading": {
     "transaction_set_header_ST": {
       "transaction_set_identifier_code_01": **.ST_01_TransactionSetIdentifierCode,
@@ -345,4 +349,4 @@
     "transaction_segment_count_01": $count(**.segments),
     "transaction_set_control_number_02": $number(**.ST_02_TransactionSetControlNumber)
   }
-}
+})

@@ -8,7 +8,7 @@ from tests.common_test_utils import get_root_path, read_as_json, read_as_str
 idets837= read_as_json('resources/f02_837_input_json_aws/X222-COB-claim-from-billing-provider-to-payer-b.aws.json')
 idets835 = read_as_json('resources/f04_835_output_json_idets/idets-multiple-claims.json')
 
-mapping_837 = read_as_str('resources/mappings/x221-837.jsn')
+mapping_837 = read_as_str('resources/mappings/x221-837.json')
 mapping_835 = read_as_str('resources/mappings/x221-835.jsn')
 
 def test_jsonata_835_idets_to_aws():

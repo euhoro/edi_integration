@@ -150,14 +150,28 @@ Map the needed fields to create a proper 835 for the given 837 ( 100 %)
 focus on : 
 
 mapping 
+
 variants ???
+    222a1 all ok BUT ALL PARSABLE ?
+    222a2 all ok BUT ALL PARSABLE ?
+    223 not processed
+    222 not processed
+
+json
+
+sometimes loops cannot be in the same format ???  [1]
+hello world working - what about others ?
+take another sample end to end and pydentic it 
+
 835 from 837 ( check if we have all the data / check what will store in the DB ) 
 
 is claim valid to process ? 
 what user can do - > 
    autopay 
    no autopay 
-   
+
+office ally ---- 
+other features - dashboard
 -----------------
    835 paid in multiple instalments
    835 won't pay (reject)
@@ -223,6 +237,6 @@ primary_phone                   :   15558912457
 
 
 
-
+#SQLFluff #dbt #DataEngineering #LintAllTheThings
 
 

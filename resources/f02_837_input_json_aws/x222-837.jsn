@@ -1,7 +1,7 @@
 (
   /* 1) Declare a variable for easy access to the "LX-2400_loop" array */
-  $lx2400loop := **."LX-2400_loop";
-  
+  $allLoops := **."LX-2400_loop";
+
   {
   "heading": {
     "transaction_set_header_ST": {
@@ -290,7 +290,7 @@
                         }
                       }
                     ],
-                    "service_line_number_LX_loop": **."LX-2400_loop".{
+                    "service_line_number_LX_loop": $allLoops.{
                       "service_line_number_LX": {
                         "assigned_number_01": $number(LX_01)
                       },

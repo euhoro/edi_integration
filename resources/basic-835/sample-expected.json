@@ -1,0 +1,69 @@
+[
+  {
+    "SVC-2110_loop": [
+      {
+        "SVC_01": {
+          "product_or_service_id_qualifier_01": "HC",
+          "adjudicated_procedure_code_02": "99213"
+        },
+        "SVC_02": "150",
+        "SVC_03": "80",
+        "SVC_05": "1"
+      },
+      {
+        "DTM_01": "472",
+        "DTM_02": "20190101"
+      },
+      {
+        "CAS_01": "CO",
+        "CAS_02": "45",
+        "CAS_03": "70"
+      },
+      {}
+    ]
+  },
+  {
+    "SVC-2110_loop": [
+      {
+        "SVC_01": {
+          "product_or_service_id_qualifier_01": "HC",
+          "adjudicated_procedure_code_02": "85003"
+        },
+        "SVC_02": "100",
+        "SVC_03": "0",
+        "SVC_05": "1"
+      },
+      {
+        "DTM_01": "472",
+        "DTM_02": "20190101"
+      },
+      {
+        "CAS_01": "CO",
+        "CAS_02": "204",
+        "CAS_03": "100"
+      }
+    ]
+  },
+  {
+    "SVC-2110_loop": [
+      {
+        "SVC_01": {
+          "product_or_service_id_qualifier_01": "HC",
+          "adjudicated_procedure_code_02": "36415"
+        },
+        "SVC_02": "150",
+        "SVC_03": "0",
+        "SVC_05": "1"
+      },
+      {
+        "DTM_01": "472",
+        "DTM_02": "20190101"
+      },
+      {
+        "CAS_01": "CO",
+        "CAS_02": "97",
+        "CAS_03": "150"
+      }
+    ]
+  }
+]

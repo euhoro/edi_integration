@@ -73,11 +73,18 @@ def test_jsonata_837_aws_to_idets():
     )
 
 
-def test_simple_sample():
+def test_simple_sample837():
     check_jsonata(
-        input_json_path='resources/basics/jsonata-in.json',
-        jsn_mapping_path='resources/basics/jsonata-in.mapping.jsn',
-        expected_json_path='resources/basics/jsonata-in.after_mapping.json',
+        input_json_path='resources/basics-837/jsonata-in.json',
+        jsn_mapping_path='resources/basics-837/jsonata-in.mapping.jsn',
+        expected_json_path='resources/basics-837/jsonata-in.after_mapping.json',
+    )
+
+def test_simple_sample835():
+    check_jsonata(
+        input_json_path='resources/basic-835/sample-in.json',
+        jsn_mapping_path='resources/basic-835/sample.mapping.jsn',
+        expected_json_path='resources/basic-835/sample-expected.json',
     )
 
 def test_jsonata_837_aws_to_idets_after_py():

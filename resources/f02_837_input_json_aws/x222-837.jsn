@@ -324,7 +324,7 @@
                           },
                           "paid_service_unit_count_05": $number(SVD_05)
                         },
-                        "line_adjustment_CAS": CAS.{
+                        "line_adjustment_CAS": {
                           "claim_adjustment_group_code_01": CAS_01,
                           "adjustment_reason_code_02": CAS_02,
                           "adjustment_amount_03": $number(CAS_03)

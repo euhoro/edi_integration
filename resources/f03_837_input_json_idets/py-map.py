@@ -37,9 +37,30 @@ def transform_service_line_number_LX_loop(service_lines_raw):
                     dic['line_adjudication_information_SVD_loop'] ={}
                 dic['line_adjudication_information_SVD_loop']['line_check_or_remittance_date_DTP'] = k['line_check_or_remittance_date_DTP']
 
+            if 'claim_adjustment_group_code_01' in k['line_adjustment_CAS'] and k['line_adjustment_CAS']['claim_adjustment_group_code_01'] is not None:
+                if 'line_adjudication_information_SVD_loop' not in dic:
+                    dic['line_adjudication_information_SVD_loop'] ={}
+                dic['line_adjudication_information_SVD_loop']['line_adjustment_CAS'] = [k['line_adjustment_CAS']]
+
         l['line_adjudication_information_SVD_loop'] = [dic['line_adjudication_information_SVD_loop']]
 
     return service_lines
+
+
+import json
+
+# Known segment names for EDI (add more as needed)
+valid_segments = {
+    "ST", "BHT", "NM1", "PER", "N3", "N4", "REF", "SBR", "DTP", "CLM", "HI", "LX", "SV1", "SVD", "CAS", "AMT", "OI"
+}
+
+def count_valid_segments(data):
+    if isinstance(data, dict):
+        return sum(count_valid_segments(value) for key, value in data.items()) + (1 if key.split('_')[0] in valid_segments else 0)
+    elif isinstance(data, list):
+        return sum(count_valid_segments(item) for item in data)
+    return 0
+
 
 
 def transform_json(input_json):
@@ -55,7 +76,7 @@ def transform_json(input_json):
                         claim["service_line_number_LX_loop"] = transform_service_line_number_LX_loop(
                             claim["service_line_number_LX_loop"]
                         )
-
+    #count_s = count_valid_segments(input_json)
     return input_json
 
 

@@ -343,10 +343,10 @@
           }
         ]
       }
-    ]
-  },
-  "transaction_set_trailer_SE": {
+    ],
+     "transaction_set_trailer_SE": {
     "transaction_segment_count_01": $count(**.segments),
     "transaction_set_control_number_02": $number(**.ST_02_TransactionSetControlNumber)
+  }
   }
 })

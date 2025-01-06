@@ -528,10 +528,10 @@
           }
         ]
       }
-    ]
-  },
-  "transaction_set_trailer_SE": {
-    "transaction_segment_count_01": 4,
-    "transaction_set_control_number_02": 1234
+    ],
+    "transaction_set_trailer_SE": {
+      "transaction_segment_count_01": 4,
+      "transaction_set_control_number_02": 1234
+    }
   }
 }

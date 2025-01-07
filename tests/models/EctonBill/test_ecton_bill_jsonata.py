@@ -6,8 +6,7 @@ import pytest
 
 from mapping.x222 import transform_json_aws837_after_jsonata
 from mapping.x222_to_aws import transform_json_ecton835_after_jsonata
-from tests.common_test_utils import (get_root_path, read_as_json, read_as_str,
-                                     write_as_json)
+from tests.common_test_utils import (read_as_json, read_as_str, write_as_json)
 
 # File paths
 PAYER_B_JSON = "resources/f03_837_input_json_idets/X222-COB-claim-from-billing-provider-to-payer-b.json"
@@ -36,7 +35,7 @@ def check_jsonata(
         expected_json_path (str): Path to the file containing the expected JSON output.
         transform_func (callable): Optional function to transform the resultant JSON before validation.
     """
-    root_path = get_root_path()
+    #root_path = get_root_path()
 
     # Read input JSON and JSN mapping
     input_json = read_as_json(input_json_path)
@@ -49,14 +48,11 @@ def check_jsonata(
     # Apply optional transformation
     if transform_func:
         result = transform_func(result)
-
         # write_as_json(result,input_json_path.replace(".json", ".out.json"))
         # assert os.path.exists(temp_output_path), "Failed to write the resulting file."
 
     # Load the expected JSON file
-    expected_path = os.path.join(root_path, expected_json_path)
-    with open(expected_path, "r") as expected_file:
-        expected_data = json.load(expected_file)
+    expected_data = read_as_json(expected_json_path)
 
     # Assert result matches the expected data
     assert (

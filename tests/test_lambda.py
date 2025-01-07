@@ -3,7 +3,7 @@ import pytest
 import boto3
 from moto import mock_aws
 
-from lambda_function import lambda_handler, EUGEN_835_BUCKET
+from lambda_function import lambda_handler, EUGEN_835_BUCKET, EUGEN_837_BUCKET
 
 
 # @mock_aws
@@ -33,7 +33,7 @@ def s3_setup():
         conn = boto3.resource("s3", region_name="us-east-1")
         # We need to create the bucket since this is all in Moto's 'virtual' AWS account
 
-        src = "source-bucket-name"
+        src = EUGEN_837_BUCKET
         dst = EUGEN_835_BUCKET
 
 
@@ -77,13 +77,29 @@ def test_lambda_handler_move_object(s3_setup):
             }
         ]
     }
+    """
+    {
+  "Records": [
+    {
+      "s3": {
+        "bucket": {
+          "name": "eugen837"
+        },
+        "object": {
+          "key": "dummy.json"
+        }
+      }
+    }
+  ]
+}"""
 
     # Invoke the Lambda handler
     response = lambda_handler(event, None)
 
     # Assert that the Lambda response indicates success
     assert response["statusCode"] == 200
-    assert f"File moved to {destination_bucket}/processed/{source_key}" in response["body"]
+    #assert f"File moved to {destination_bucket}/processed/{source_key}" in response["body"]
+    assert f"File processed and uploaded to {destination_bucket}/processed/{source_key}" in response["body"]
 
     # Verify the object exists in the destination bucket
     objects_in_destination = s3.list_objects_v2(Bucket=destination_bucket, Prefix=f"processed/{source_key}")

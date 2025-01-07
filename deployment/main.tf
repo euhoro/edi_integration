@@ -35,11 +35,21 @@ resource "aws_iam_role" "lambda_exec_role" {
       Version = "2012-10-17",
       Statement = [
         {
-          Action   = ["s3:GetObject", "s3:PutObject"],
+          # Permissions for reading, writing, and deleting objects
+          Action   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
           Effect   = "Allow",
           Resource = [
             "arn:aws:s3:::eugen835/*", # Destination bucket
             "arn:aws:s3:::eugen837/*"  # Source bucket
+          ]
+        },
+        {
+          # Permissions for listing the buckets if needed
+          Action   = ["s3:ListBucket"],
+          Effect   = "Allow",
+          Resource = [
+            "arn:aws:s3:::eugen835",
+            "arn:aws:s3:::eugen837"
           ]
         }
       ]

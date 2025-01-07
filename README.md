@@ -261,3 +261,10 @@ primary_phone                   :   15558912457
 
 user stories 
 tasks !
+
+1 terraform 
+2 link layers 
+3 test
+
+4 add b2b
+fix readas str

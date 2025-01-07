@@ -1,9 +1,12 @@
 import jsonata
 
+from tests.common_test_utils import read_as_json, read_as_str
+
+
 # from utils.common_utils import read_as_json, read_as_str
 
 
-def check_jsonata(input_json_file, mapping_file):
+def check_jsonata(input_json_file, mapping):
     """
     Processes a given JSON file with a JSONata mapping file.
 
@@ -15,12 +18,12 @@ def check_jsonata(input_json_file, mapping_file):
         dict: Transformed JSON object.
     """
     # Read input JSON and JSONata mapping
-    # input_json = read_as_json(input_json_file)
-    # mapping = read_as_str(mapping_file)
-    #
-    # # Apply JSONata transformation
-    # expr = jsonata.Jsonata(mapping)
-    # result = expr.evaluate(input_json)
+    input_json = read_as_json(input_json_file)
+    #mapping = read_as_str(mapping_file)
 
-    # return result
-    return {}
+    # Apply JSONata transformation
+    expr = jsonata.Jsonata(mapping)
+    result = expr.evaluate(input_json)
+
+    return result
+

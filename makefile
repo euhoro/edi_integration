@@ -20,4 +20,4 @@ test:
     # python3.12 -m venv venv
     # source venv/bin/activate
 	# pack
-    # zip -r lambda-code.zip . -x "*.venv/*" "*.DS_Store" "deployment/*" "documentation/*" "*.resources/*"
+    # zip -r lambda-code.zip . -x ".pytest_cache/*" "tests/*" ".idea/*" ".git/*" "venv/*" "*.venv/*" "*.DS_Store" "deployment/*" "documentation/*" "*.resources/*"

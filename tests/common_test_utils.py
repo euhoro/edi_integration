@@ -17,6 +17,12 @@ def read_as_json(path_from_root ) -> dict:
         file_data = json.load(file)  # Parse the JSON file into a dictionary
         return file_data
 
+def write_as_json(result, path_from_root) -> dict:
+    root_path = get_root_path()
+    file_path = os.path.join(root_path, path_from_root)
+    with open(file_path, "w") as temp_file:
+        json.dump(result, temp_file, indent=2)
+
 
 def get_root_path() -> str:
     current_path = Path(__file__).resolve()

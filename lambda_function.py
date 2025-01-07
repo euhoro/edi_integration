@@ -1,12 +1,17 @@
 import json
 
-import boto3
-
 from utils.json_processor import check_jsonata
 from utils.s3_utils import download_s3_file, upload_s3_file
 
 
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger()
+
+
 def lambda_handler(event, context):
+    logger.info("Received Event: %s", event)
     """
     AWS Lambda handler to process JSON files.
     """

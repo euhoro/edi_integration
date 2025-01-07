@@ -15,3 +15,7 @@ lint:
 test:
 	# Runs unit tests
 	pytest
+
+#zipp:
+	# pack
+    #zip -r lambda-code.zip . -x "*.venv/*" "*.DS_Store" "deployment/*" "documentation/*" "*.resources/*"

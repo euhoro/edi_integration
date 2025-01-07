@@ -140,7 +140,7 @@ Map the needed fields to create a proper 835 for the given 837 ( 100 %)
 
 5. **Expand Testing**: Include additional scenarios and edge cases.
 6. **SMTP Integration**: Configure email settings for clearing house communication.
-7. **STEDI DEMO**: Conduct evaluation
+7. **IDETS DEMO**: Conduct evaluation
 
 8. **Check other files **: x223
 9. **Create Enums from schema **: (no referring provider )

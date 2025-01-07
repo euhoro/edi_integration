@@ -1,10 +1,11 @@
-import pytest
 from datetime import date
 from decimal import Decimal
-from typing import Dict, Any
+from typing import Any, Dict
 
-from models.EctonBill.ecton_bill import SecondaryBill, Address, Provider, Patient, ServiceLine
+import pytest
 
+from models.EctonBill.ecton_bill import (Address, Patient, Provider,
+                                         SecondaryBill, ServiceLine)
 
 # Assuming the previous model is in secondary_bill.py
 # from secondary_bill import SecondaryBill, Provider, Patient, Address, PrimaryInsurance, ServiceLine, Diagnosis
@@ -25,8 +26,8 @@ def valid_test_data() -> Dict[str, Any]:
                 "address_line1": "1234 SEAWAY ST",
                 "city": "MIAMI",
                 "state": "FL",
-                "zip_code": "33111"
-            }
+                "zip_code": "33111",
+            },
         },
         "service_facility": {
             "npi": "1581234567",
@@ -36,8 +37,8 @@ def valid_test_data() -> Dict[str, Any]:
                 "address_line1": "2345 OCEAN BLVD",
                 "city": "MIAMI",
                 "state": "FL",
-                "zip_code": "33111"
-            }
+                "zip_code": "33111",
+            },
         },
         "patient": {
             "first_name": "TED",
@@ -50,8 +51,8 @@ def valid_test_data() -> Dict[str, Any]:
                 "address_line1": "236 N MAIN ST",
                 "city": "MIAMI",
                 "state": "FL",
-                "zip_code": "33413"
-            }
+                "zip_code": "33413",
+            },
         },
         "primary_insurance": {
             "payer_name": "KEY INSURANCE COMPANY",
@@ -60,7 +61,7 @@ def valid_test_data() -> Dict[str, Any]:
             "paid_date": "2005-10-15",
             "total_paid": "39.15",
             "total_adjusted": "36.89",
-            "total_patient_responsibility": "3.00"
+            "total_patient_responsibility": "3.00",
         },
         "original_claim_date": "2005-10-03",
         "total_charge": "79.04",
@@ -69,7 +70,7 @@ def valid_test_data() -> Dict[str, Any]:
             {"code": "4779", "pointer": 1},
             {"code": "2724", "pointer": 2},
             {"code": "2780", "pointer": 3},
-            {"code": "53081", "pointer": 4}
+            {"code": "53081", "pointer": 4},
         ],
         "service_lines": [
             {
@@ -83,7 +84,7 @@ def valid_test_data() -> Dict[str, Any]:
                 "primary_paid": "40.00",
                 "primary_adjusted": "3.00",
                 "primary_adjustment_reason": "42",
-                "remaining_balance": "3.00"
+                "remaining_balance": "3.00",
             },
             {
                 "line_number": 2,
@@ -95,7 +96,7 @@ def valid_test_data() -> Dict[str, Any]:
                 "diagnosis_pointers": [1, 2],
                 "primary_paid": "15.00",
                 "primary_adjusted": "0.00",
-                "remaining_balance": "0.00"
+                "remaining_balance": "0.00",
             },
             {
                 "line_number": 3,
@@ -107,10 +108,10 @@ def valid_test_data() -> Dict[str, Any]:
                 "diagnosis_pointers": [1, 2],
                 "primary_paid": "21.04",
                 "primary_adjusted": "0.00",
-                "remaining_balance": "0.00"
-            }
+                "remaining_balance": "0.00",
+            },
         ],
-        "total_remaining": "3.00"
+        "total_remaining": "3.00",
     }
 
 
@@ -132,7 +133,7 @@ def test_address_validation():
         "address_line1": "1234 SEAWAY ST",
         "city": "MIAMI",
         "state": "FL",
-        "zip_code": "33111"
+        "zip_code": "33111",
     }
     address = Address.model_validate(address_data)
     assert address.state == "FL"
@@ -195,7 +196,7 @@ def test_diagnosis_pointers_validation(valid_test_data):
     """Test validation of diagnosis pointers"""
     test_data = valid_test_data
     # Add an invalid diagnosis pointer that doesn't exist
-    #test_data["service_lines"][0]["diagnosis_pointers"] = [1, 2, 3, 4, 5]
+    # test_data["service_lines"][0]["diagnosis_pointers"] = [1, 2, 3, 4, 5]
     test_data["service_lines"][0]["diagnosis_pointers"] = 9
 
     with pytest.raises(ValueError):
@@ -216,34 +217,52 @@ def convert_837_to_secondary_bill(edi_837_data: dict) -> dict:
     """Convert EDI 837 data to SecondaryBill format"""
 
     # Extract claim information
-    claim_info = (edi_837_data["detail"]["billing_provider_hierarchical_level_HL_loop"][0]
-    ["subscriber_hierarchical_level_HL_loop"][0]
-    ["patient_hierarchical_level_HL_loop"][0]
-    ["claim_information_CLM_loop"][0])
+    claim_info = edi_837_data["detail"]["billing_provider_hierarchical_level_HL_loop"][
+        0
+    ]["subscriber_hierarchical_level_HL_loop"][0]["patient_hierarchical_level_HL_loop"][
+        0
+    ][
+        "claim_information_CLM_loop"
+    ][
+        0
+    ]
 
     # Extract billing provider information
-    billing_provider = edi_837_data["detail"]["billing_provider_hierarchical_level_HL_loop"][0][
-        "billing_provider_name_NM1_loop"]
+    billing_provider = edi_837_data["detail"][
+        "billing_provider_hierarchical_level_HL_loop"
+    ][0]["billing_provider_name_NM1_loop"]
 
     return {
         "bill_id": claim_info["claim_information_CLM"]["patient_control_number_01"],
         "creation_date": date.today().isoformat(),
         "billing_provider": {
-            "npi": billing_provider["billing_provider_name_NM1"]["billing_provider_identifier_09"],
+            "npi": billing_provider["billing_provider_name_NM1"][
+                "billing_provider_identifier_09"
+            ],
             "tax_id": billing_provider["billing_provider_tax_identification_REF"][
-                "billing_provider_tax_identification_number_02"],
+                "billing_provider_tax_identification_number_02"
+            ],
             "name": f"{billing_provider['billing_provider_name_NM1']['billing_provider_last_or_organizational_name_03']}, {billing_provider['billing_provider_name_NM1']['billing_provider_first_name_04']}",
-            "contact_name": billing_provider["billing_provider_contact_information_PER"][0][
-                "billing_provider_contact_name_02"],
-            "contact_phone": billing_provider["billing_provider_contact_information_PER"][0]["communication_number_04"],
+            "contact_name": billing_provider[
+                "billing_provider_contact_information_PER"
+            ][0]["billing_provider_contact_name_02"],
+            "contact_phone": billing_provider[
+                "billing_provider_contact_information_PER"
+            ][0]["communication_number_04"],
             "address": {
-                "address_line1": billing_provider["billing_provider_address_N3"]["billing_provider_address_line_01"],
-                "city": billing_provider["billing_provider_city_state_zip_code_N4"]["billing_provider_city_name_01"],
+                "address_line1": billing_provider["billing_provider_address_N3"][
+                    "billing_provider_address_line_01"
+                ],
+                "city": billing_provider["billing_provider_city_state_zip_code_N4"][
+                    "billing_provider_city_name_01"
+                ],
                 "state": billing_provider["billing_provider_city_state_zip_code_N4"][
-                    "billing_provider_state_or_province_code_02"],
+                    "billing_provider_state_or_province_code_02"
+                ],
                 "zip_code": billing_provider["billing_provider_city_state_zip_code_N4"][
-                    "billing_provider_postal_zone_or_zip_code_03"]
-            }
+                    "billing_provider_postal_zone_or_zip_code_03"
+                ],
+            },
         },
         # ... Add more field mappings as needed
     }
@@ -329,44 +348,55 @@ def convert_837_to_secondary_bill(edi_837_data: dict) -> dict:
 #         "service_details": service_details
 #     }
 
+
 def test_convert_837_to_secondary_bill():
     """Test converting EDI 837 data to SecondaryBill format"""
     # Sample EDI 837 data (you would need to provide actual test data)
     edi_837_data = {
         "detail": {
-            "billing_provider_hierarchical_level_HL_loop": [{
-                "billing_provider_name_NM1_loop": {
-                    "billing_provider_name_NM1": {
-                        "billing_provider_identifier_09": "1999996666",
-                        "billing_provider_last_or_organizational_name_03": "KILDARE",
-                        "billing_provider_first_name_04": "BEN"
-                    },
-                    "billing_provider_tax_identification_REF": {
-                        "billing_provider_tax_identification_number_02": "123456789"
-                    },
-                    "billing_provider_contact_information_PER": [{
-                        "billing_provider_contact_name_02": "CONNIE",
-                        "communication_number_04": "3055551234"
-                    }],
-                    "billing_provider_address_N3": {
-                        "billing_provider_address_line_01": "1234SEAWAY ST"
-                    },
-                    "billing_provider_city_state_zip_code_N4": {
-                        "billing_provider_city_name_01": "MIAMI",
-                        "billing_provider_state_or_province_code_02": "FL",
-                        "billing_provider_postal_zone_or_zip_code_03": "33111"
-                    }
-                },
-                "subscriber_hierarchical_level_HL_loop": [{
-                    "patient_hierarchical_level_HL_loop": [{
-                        "claim_information_CLM_loop": [{
-                            "claim_information_CLM": {
-                                "patient_control_number_01": "26407789"
+            "billing_provider_hierarchical_level_HL_loop": [
+                {
+                    "billing_provider_name_NM1_loop": {
+                        "billing_provider_name_NM1": {
+                            "billing_provider_identifier_09": "1999996666",
+                            "billing_provider_last_or_organizational_name_03": "KILDARE",
+                            "billing_provider_first_name_04": "BEN",
+                        },
+                        "billing_provider_tax_identification_REF": {
+                            "billing_provider_tax_identification_number_02": "123456789"
+                        },
+                        "billing_provider_contact_information_PER": [
+                            {
+                                "billing_provider_contact_name_02": "CONNIE",
+                                "communication_number_04": "3055551234",
                             }
-                        }]
-                    }]
-                }]
-            }]
+                        ],
+                        "billing_provider_address_N3": {
+                            "billing_provider_address_line_01": "1234SEAWAY ST"
+                        },
+                        "billing_provider_city_state_zip_code_N4": {
+                            "billing_provider_city_name_01": "MIAMI",
+                            "billing_provider_state_or_province_code_02": "FL",
+                            "billing_provider_postal_zone_or_zip_code_03": "33111",
+                        },
+                    },
+                    "subscriber_hierarchical_level_HL_loop": [
+                        {
+                            "patient_hierarchical_level_HL_loop": [
+                                {
+                                    "claim_information_CLM_loop": [
+                                        {
+                                            "claim_information_CLM": {
+                                                "patient_control_number_01": "26407789"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                }
+            ]
         }
     }
 

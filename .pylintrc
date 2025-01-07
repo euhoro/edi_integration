@@ -1,0 +1,8 @@
+[MESSAGES CONTROL]
+disable=C0301, W1514 ,C0103,W0611,W0611,R1710,C0116,C0115,W0621,C0114,E0401,W0613,C0413,W0404,C0415,R0801
+                        # Ignore specific rule violations:
+                        # C0301: Line too long
+                        # W1514: Using open without explicitly specifying the encoding
+
+[FORMAT]
+max-line-length=88  # Match the line length limit with black

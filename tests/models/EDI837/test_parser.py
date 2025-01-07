@@ -1,7 +1,7 @@
+import json  # Example for parsing JSON data
 import os
 import tempfile
 import unittest
-import json  # Example for parsing JSON data
 from pathlib import Path
 
 from pydantic import ValidationError
@@ -315,6 +315,7 @@ edi_837_json = """{
   }
 }"""  # Replace with the modified JSON string
 
+
 class TestDataParsing(unittest.TestCase):
     def test_parse_from_string(self):
         """Test parsing data from a string."""
@@ -332,7 +333,6 @@ class TestDataParsing(unittest.TestCase):
         print(edi_837.heading)
         print(edi_837.detail)
 
-
         # self.assertIsInstance(parsed_data, dict)
         # self.assertEqual(parsed_data['name'], 'John Doe')
         # self.assertEqual(parsed_data['age'], 30)
@@ -340,10 +340,13 @@ class TestDataParsing(unittest.TestCase):
 
     def test_parse_from_file(self):
         """Test parsing data from a file."""
-        #file_path = os.path.dirname(os.path.abspath(__file__))  #
+        # file_path = os.path.dirname(os.path.abspath(__file__))  #
         root_path = get_root_path()
 
-        file_path = os.path.join(str(root_path), "resources/f03_837_input_json_idets/X222-COB-claim-from-billing-provider-to-payer-b.json")
+        file_path = os.path.join(
+            str(root_path),
+            "resources/f03_837_input_json_idets/X222-COB-claim-from-billing-provider-to-payer-b.json",
+        )
         edi_837 = self.load_edi_from_file(file_path)
         # Verify the parsed data matches expected values
         self.assertIsInstance(edi_837, Edi837Idets)
@@ -351,10 +354,11 @@ class TestDataParsing(unittest.TestCase):
         # self.assertEqual(edi_837.age, 30)
         # self.assertEqual(edi_837.city, "New York")
 
-
     def test_parse_edi_837_with_temp_file(self):
         # Create a temporary file and write the edi_837_json string to it
-        with tempfile.NamedTemporaryFile(mode="w+", delete=True, suffix=".json") as temp_file:
+        with tempfile.NamedTemporaryFile(
+            mode="w+", delete=True, suffix=".json"
+        ) as temp_file:
             temp_file.write(edi_837_json)
             temp_file.seek(0)
 
@@ -374,7 +378,7 @@ class TestDataParsing(unittest.TestCase):
             # self.assertEqual(edi_837.city, "New York")
 
     def load_edi_from_file(self, file_path):
-       # Open the same file to read its content and load it as JSON
+        # Open the same file to read its content and load it as JSON
         with open(file_path, "r") as file:
             parsed_data = json.load(file)
 
@@ -384,7 +388,6 @@ class TestDataParsing(unittest.TestCase):
             return edi_837
         except ValidationError as e:
             self.fail(f"Failed to parse EDI837 JSON: {e}")
-
 
 
 if __name__ == "__main__":

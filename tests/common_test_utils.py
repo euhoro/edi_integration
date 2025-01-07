@@ -3,19 +3,25 @@ import os
 from pathlib import Path
 
 
-def read_as_str(path_from_root ) -> str:
-    root_path = get_root_path()  # `get_root_path` should be defined somewhere in your project.
-    file_path = os.path.join(root_path, path_from_root)  # Join the root path with the relative path.
-    with open(file_path, 'r') as file:
+def read_as_str(path_from_root) -> str:
+    root_path = (
+        get_root_path()
+    )  # `get_root_path` should be defined somewhere in your project.
+    file_path = os.path.join(
+        root_path, path_from_root
+    )  # Join the root path with the relative path.
+    with open(file_path, "r") as file:
         file_data = file.read()  # Read the entire file as a string.
         return file_data
 
-def read_as_json(path_from_root ) -> dict:
+
+def read_as_json(path_from_root) -> dict:
     root_path = get_root_path()
     file_path = os.path.join(root_path, path_from_root)
-    with open(file_path, 'r') as file:
+    with open(file_path, "r") as file:
         file_data = json.load(file)  # Parse the JSON file into a dictionary
         return file_data
+
 
 def write_as_json(result, path_from_root) -> dict:
     root_path = get_root_path()

@@ -1,7 +1,7 @@
+import json  # Example for parsing JSON data
 import os
 import tempfile
 import unittest
-import json  # Example for parsing JSON data
 from pathlib import Path
 
 from pydantic import ValidationError
@@ -543,9 +543,11 @@ edi_837_json = """{
   }
 }"""  # Replace with the modified JSON string
 
+
 class TestDataParsing(unittest.TestCase):
     def test_parse_from_string(self):
         import json
+
         edi_835_data = json.loads(edi_835_dict)
 
         # Use the updated EDI837 model to parse the JSON
@@ -557,30 +559,31 @@ class TestDataParsing(unittest.TestCase):
 
     def test_parse_from_file(self):
         """Test parsing data from a file."""
-        #file_path = os.path.dirname(os.path.abspath(__file__))  #
+        # file_path = os.path.dirname(os.path.abspath(__file__))  #
         current_path = Path(__file__).resolve()
         root_path = current_path.parent
         while root_path.name != "tests":
             root_path = root_path.parent
         root_path = root_path.parent  # Get the parent of 'tests'
 
-
-        file_path = os.path.join(str(root_path), "resources/f04_835_output_json_idets/idets-multiple-claims.json")
-        #file_path = os.path.join(str(root_path), "resources/f04_835_output_json_idets/temp_str.json")
+        file_path = os.path.join(
+            str(root_path),
+            "resources/f04_835_output_json_idets/idets-multiple-claims.json",
+        )
+        # file_path = os.path.join(str(root_path), "resources/f04_835_output_json_idets/temp_str.json")
         edi_835 = self.load_edi_835_from_file(file_path)
         self.assertIsInstance(edi_835, EDI835Idets)
 
-
-
     def test_parse_edi_835_with_temp_file(self):
         # Create a temporary file and write the edi_837_json string to it
-        with tempfile.NamedTemporaryFile(mode="w+", delete=True, suffix=".json") as temp_file:
+        with tempfile.NamedTemporaryFile(
+            mode="w+", delete=True, suffix=".json"
+        ) as temp_file:
             temp_file.write(edi_837_json)
             temp_file.seek(0)
 
             # Read the content of the temporary file and load as JSON
             edi_835_data = json.loads(edi_835_dict)
-
 
             # Validate and parse the JSON content using the EDI837 model
             try:
@@ -595,13 +598,12 @@ class TestDataParsing(unittest.TestCase):
             # self.assertEqual(edi_837.city, "New York")
 
     def load_edi_835_from_file(self, file_path):
-        with open( file_path,'r') as f:
+        with open(file_path, "r") as f:
             data = json.load(f)
 
         # Parse into Pydantic model
         edi_835b = load_edi_835(data)
-        return  edi_835b
-
+        return edi_835b
 
 
 if __name__ == "__main__":

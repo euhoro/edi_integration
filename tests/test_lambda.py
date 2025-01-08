@@ -91,7 +91,8 @@ def test_lambda_handler_move_object(s3_setup):
       }
     }
   ]
-}"""
+}
+"""
 
     # Invoke the Lambda handler
     response = lambda_handler(event, None)

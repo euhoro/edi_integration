@@ -1,7 +1,9 @@
 import json
 
+# from mapping.x222 import transform_json_aws837_after_jsonata
+# from models.EDI837.EDI837_idets import Edi837Idets
 from tests.common_test_utils import read_as_str
-from utils.json_processor import check_jsonata
+from utils.json_processor import transform_jsonata
 from utils.s3_utils import download_s3_file, upload_s3_file, delete_s3_file
 
 import logging
@@ -28,12 +30,12 @@ def lambda_handler(event, context):
     input_file = "/tmp/input.json"
     download_s3_file(source_bucket, source_key, input_file)
 
-    # Process the JSON file
-    # input_mapping = "/tmp/mapping.jsn"  # Add your mapping file here
-    # with open(input_mapping, "w") as mock_mapping:
-    #     mock_mapping.write("{}")
+    # processed_json = transform_jsonata(input_file, read_as_str('resources/f02_837_input_json_aws/x222-837.jsn'),
+    #                                    transform_func=transform_json_aws837_after_jsonata)
 
-    processed_json = check_jsonata(input_file, read_as_str('resources/f02_837_input_json_aws/x222-837.jsn'))
+    processed_json = transform_jsonata(input_file, read_as_str('resources/f02_837_input_json_aws/x222-837.jsn'))
+
+    #edi_837 = Edi837Idets.parse_obj(processed_json)
 
     # Save processed result to a temporary location
     processed_file = "/tmp/transformed.json"

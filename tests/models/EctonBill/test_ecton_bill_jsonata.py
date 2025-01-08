@@ -4,9 +4,12 @@ import os
 import jsonata
 import pytest
 
+from converters.x837_to_x835 import convert_x837_to_x835, convert_x837_to_ecton_bill
 from mapping.x222 import transform_json_aws837_after_jsonata
 from mapping.x222_to_aws import transform_json_ecton835_after_jsonata
+from models.EDI837.EDI837_idets import Edi837Idets
 from tests.common_test_utils import (read_as_json, read_as_str, write_as_json)
+from utils.json_processor import transform_jsonata
 
 # File paths
 PAYER_B_JSON = "resources/f03_837_input_json_idets/X222-COB-claim-from-billing-provider-to-payer-b.json"
@@ -109,6 +112,13 @@ def test_jsonata_837_aws_to_idets_after_py():
         transform_func=transform_json_aws837_after_jsonata,
     )
 
+
+def test_jsonata_837_aws_to_idets_after_py_and_convert():
+    edi_837_dict = transform_jsonata(IDETS_837_JSON,read_as_str(MAPPING_837_JSN),transform_json_aws837_after_jsonata)
+    edi837 = Edi837Idets.parse_obj(edi_837_dict)
+    edi835 = convert_x837_to_x835(edi837)
+    ecton_bill = convert_x837_to_ecton_bill(edi837)
+    pass
 
 if __name__ == "__main__":
     pytest.main([__file__])

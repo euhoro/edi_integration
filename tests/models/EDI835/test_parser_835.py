@@ -235,8 +235,6 @@ edi_835_dict = """{
   }
 }"""
 
-from models.EDI837.EDI837_idets import Edi837Idets
-
 edi_837_json = """{
   "heading": {
     "transaction_set_header_ST": {

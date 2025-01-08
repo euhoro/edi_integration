@@ -205,8 +205,7 @@ def test_diagnosis_pointers_validation(valid_test_data):
 
 def test_total_remaining_calculation(valid_test_data):
     """Test that total remaining matches sum of service line remaining balances"""
-    test_data = valid_test_data
-    bill = SecondaryBill.model_validate(test_data)
+    bill = SecondaryBill.model_validate(valid_test_data)
 
     calculated_total = sum(line.remaining_balance for line in bill.service_lines)
     assert bill.total_remaining == calculated_total

@@ -115,7 +115,7 @@ def test_jsonata_837_aws_to_idets_after_py():
 
 def test_jsonata_837_aws_to_idets_after_py_and_convert():
     edi_837_dict = transform_jsonata(IDETS_837_JSON,read_as_str(MAPPING_837_JSN),transform_json_aws837_after_jsonata)
-    edi837 = Edi837Idets.parse_obj(edi_837_dict)
+    edi837 = Edi837Idets.model_validate(edi_837_dict)
     edi835 = convert_x837_to_x835(edi837)
     ecton_bill = convert_x837_to_ecton_bill(edi837)
     pass

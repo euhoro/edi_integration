@@ -109,7 +109,7 @@ class ServiceSupplementalAmountAMT(BaseModel):
 class ServicePaymentLoop(BaseModel):
     service_payment_information_SVC: ServicePaymentInformationSVC
     service_date_DTM: List[ServiceDateDTM]
-    service_adjustment_CAS: List[ServiceAdjustmentCAS]
+    service_adjustment_CAS: Optional[List[ServiceAdjustmentCAS]] = None
     service_supplemental_amount_AMT: Optional[List[ServiceSupplementalAmountAMT]]= None
 
 class ClaimPaymentInformationCLP(BaseModel):

@@ -4,7 +4,8 @@ import os
 import jsonata
 import pytest
 
-from converters.x837_to_x835 import convert_x837_to_x835, convert_x837_to_ecton_bill
+from converters.x837_to_ecton_bill import convert_x837_to_ecton_bill
+from converters.x837_to_x835 import convert_x837_to_x835
 from mapping.x222 import transform_json_aws837_after_jsonata
 from mapping.x222_to_aws import transform_json_ecton835_after_jsonata
 from models.EDI837.EDI837_idets import Edi837Idets

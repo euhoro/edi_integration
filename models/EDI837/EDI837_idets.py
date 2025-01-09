@@ -407,14 +407,17 @@ class BillingProviderHierarchicalLevelHLLoop(BaseModel):
     billing_provider_name_NM1_loop: BillingProviderNameNM1Loop
     subscriber_hierarchical_level_HL_loop: List[SubscriberHierarchicalLevelHLLoop]
 
+class TransactionSetTrailerSE(BaseModel):
+    transaction_segment_count_01: int
+    transaction_set_control_number_02: int
 
 class Detail(BaseModel):
     billing_provider_hierarchical_level_HL_loop: List[BillingProviderHierarchicalLevelHLLoop]
-
+    transaction_set_trailer_SE: TransactionSetTrailerSE
 
 class Edi837Idets(BaseModel):
     class Config:
         extra = "allow"  # Allows additional unexpected fields in parsing
 
-    detail: Detail
     heading: Heading
+    detail: Detail

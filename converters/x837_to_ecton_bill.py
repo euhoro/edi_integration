@@ -77,6 +77,7 @@ def convert_x837_to_ecton_bill(x837: Edi837Idets) -> SecondaryBill:
             },
         },
         "primary_insurance": {
+            # primary payer ??? payer ecton
             "payer_name": secondary_payer[0].other_payer_name_NM1_loop.other_payer_name_NM1.other_payer_organization_name_03,
             "payer_id": secondary_payer[0].other_payer_name_NM1_loop.other_payer_name_NM1.other_payer_primary_identifier_09,
             "claim_number": bill_id,

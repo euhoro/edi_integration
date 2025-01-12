@@ -31,7 +31,12 @@ class ProfessionalServiceSV1(BaseModel):
 class DateServiceDateDTP(BaseModel):
     date_time_qualifier_01: str
     date_time_period_format_qualifier_02: str
-    adjudication_or_payment_date_03: str
+    adjudication_or_payment_date_03:str
+
+class DateServiceDateDTP2(BaseModel):
+    date_time_qualifier_01: Optional[str]=None
+    date_time_period_format_qualifier_02: Optional[str]=None
+    service_date_03: Optional[str]=None
 
 
 class LineAdjustmentCAS(BaseModel):
@@ -61,7 +66,7 @@ class ServiceLineNumberLXLoopItem(BaseModel):
     service_line_number_LX: ServiceLineNumberLX
     professional_service_SV1: ProfessionalServiceSV1
     line_adjudication_information_SVD_loop: List[LineAdjudicationInformationSVDLoop]
-
+    date_service_date_DTP:Optional[DateServiceDateDTP2]=None
 
 class ServiceLineNumberLXLoop(BaseModel):
     service_line_number_LX_loop: List[ServiceLineNumberLXLoopItem]

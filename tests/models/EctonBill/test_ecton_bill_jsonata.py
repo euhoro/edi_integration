@@ -8,6 +8,7 @@ from converters.x837_to_ecton_bill import convert_x837_to_ecton_bill
 from converters.x837_to_x835 import convert_x837_to_x835
 from mapping.x222 import transform_json_aws837_after_jsonata
 from mapping.x222_to_aws import transform_json_ecton835_after_jsonata
+from models.EDI835.EDI835_idets import load_edi_835
 from models.EDI837.EDI837_idets import Edi837Idets
 from tests.common_test_utils import (read_as_json, read_as_str, write_as_json)
 from utils.json_processor import transform_jsonata
@@ -117,10 +118,25 @@ def test_jsonata_837_aws_to_idets_after_py():
 def test_jsonata_837_aws_to_idets_after_py_and_convert():
     edi_837_dict = transform_jsonata(IDETS_837_JSON,read_as_str(MAPPING_837_JSN),transform_json_aws837_after_jsonata)
     edi837 = Edi837Idets.model_validate(edi_837_dict)
+
     ecton_bill = convert_x837_to_ecton_bill(edi837)
-    edi835 = convert_x837_to_x835(edi837)
-    #write_as_json(edi835,'resources/f04_835_output_json_idets/X222-COB-payerb_paid.out.json' )
+
+    check_835(edi837, 'resources/f04_835_output_json_idets/X222-COB-payerb_paid.json')
+    check_835(edi837, 'resources/f04_835_output_json_idets/X222-COB-payerb_not_paid.json', False)
     pass
+
+
+def check_835(edi837,expected_file, paid = True):
+    edi835_result = convert_x837_to_x835(edi837, paid=paid)
+    json_output = 'resources/f04_835_output_json_idets/X222-COB-payerb_paid.out.json'
+    write_as_json(edi835_result, '%s' % json_output)
+    edi835_expected = read_as_json(expected_file)
+    edi835_json_output = read_as_json(json_output)
+    # Assert result matches the expected data
+    assert (
+            edi835_json_output == edi835_expected
+    ), "The data in the file does not match the generated result."
+
 
 if __name__ == "__main__":
     pytest.main([__file__])

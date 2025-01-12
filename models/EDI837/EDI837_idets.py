@@ -235,9 +235,19 @@ class OtherPayerNameNM1Loop(BaseModel):
 
 #------
 
+class ClaimCASLine(BaseModel):
+    claim_adjustment_group_code_01: Optional[str]=None #'PR'
+    adjustment_reason_code_02:Optional[str]=None
+    adjustment_amount_03:Optional[float]=None
+    adjustment_reason_code_05: Optional[str]=None # '2'
+    adjustment_amount_06:Optional[float]=None
+
+
+
+
 class OtherSubscriberInformationSBRLoop(BaseModel):
     other_subscriber_information_SBR: OtherSubscriberInformationSBR
-    claim_level_adjustments_CAS: Optional[List[dict]]=None
+    claim_level_adjustments_CAS: Optional[List[ClaimCASLine]]=None
     coordination_of_benefits_cob_payer_paid_amount_AMT: Optional[
         CoordinationOfBenefitsPayerPaidAmountAMT
     ]

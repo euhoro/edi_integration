@@ -100,6 +100,7 @@ class ServiceAdjustmentCAS(BaseModel):
     adjustment_reason_code_02: str
     adjustment_amount_03: Decimal
 
+
 class ServiceSupplementalAmountAMT(BaseModel):
     # Example field definitions - adjust to your EDI835b model schema
     adjustment_amount_01: Optional[float] = None
@@ -131,9 +132,15 @@ class PatientNameNM1(BaseModel):
     identification_code_qualifier_08: str
     patient_identifier_09: str
 
+
+
+
+
+
 class ClaimPaymentLoop(BaseModel):
     claim_payment_information_CLP: ClaimPaymentInformationCLP
     patient_name_NM1: PatientNameNM1
+    claim_adjustment_CAS :Optional[List[ServiceAdjustmentCAS]]=None
     service_payment_information_SVC_loop: List[ServicePaymentLoop]
 
 class HeaderNumberLX(BaseModel):

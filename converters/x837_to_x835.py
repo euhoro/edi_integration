@@ -4,7 +4,7 @@ from models.EDI835.EDI835_idets import EDI835Idets
 from models.EDI837.EDI837_idets import Edi837Idets
 
 
-def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
+def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
     bill_provider = x837.detail.billing_provider_hierarchical_level_HL_loop[0].billing_provider_name_NM1_loop
     subscriber = x837.detail.billing_provider_hierarchical_level_HL_loop[0].subscriber_hierarchical_level_HL_loop[0]
     claim_patient_hierarchy = \
@@ -13,7 +13,7 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
 
     patient_loop = claim_patient_hierarchy.patient_name_NM1_loop
     service_facility = claim_patient_hierarchy.claim_information_CLM_loop[0].service_facility_location_name_NM1_loop
-    secondary_payer = claim_patient_hierarchy.claim_information_CLM_loop[0].other_subscriber_information_SBR_loop
+    secondary_other_payer = claim_patient_hierarchy.claim_information_CLM_loop[0].other_subscriber_information_SBR_loop
     service_lines = claim_patient_hierarchy.claim_information_CLM_loop[0].service_line_number_LX_loop
     lines_cas = []
     for x in service_lines:
@@ -25,13 +25,32 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
     claim = claim_patient_hierarchy.claim_information_CLM_loop[0].claim_information_CLM
     bill_id = claim_patient_hierarchy.claim_information_CLM_loop[0].claim_information_CLM.patient_control_number_01
 
-    cas_processed = [{
+    cas_service_processed = [] if paid else [{
         "claim_adjustment_group_code_01": "PR",  # PR = Patient Responsibility
         "adjustment_reason_code_02": "1",  # Deductible
         # "adjustment_amount_03": get_cas_adjusted_amount(line)
         "adjustment_amount_03": 21.89  # Deductible amount
     }
-        for i, line in enumerate(lines_cas)]
+    for i, line in enumerate(lines_cas)]
+
+    line_cas_claim = []
+    gr_code = secondary_other_payer[0].claim_level_adjustments_CAS[0].claim_adjustment_group_code_01
+    last_item = None
+    for x in secondary_other_payer[0].claim_level_adjustments_CAS[0]:
+        item_dict0 = x[0]  # Extract dictionary from the object
+        item_dict1 = x[1]  # Extract dictionary from the object
+# Get the reason code if exists
+        if 'reason_code' in item_dict0:
+            last_item = {
+                "claim_adjustment_group_code_01": gr_code,  # PR = Patient Responsibility
+                "adjustment_reason_code_02": item_dict1,
+                # Use reason code if available, else default
+                "adjustment_amount_03": 0  # Deductible amount or placeholder
+            }
+            line_cas_claim.append(last_item)
+        elif 'amount' in item_dict0:
+            last_item["adjustment_amount_03"] =item_dict1
+
 
     cob_paid = \
         {
@@ -44,12 +63,12 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                 "financial_information_BPR": {
                     "transaction_handling_code_01": "I",  # I = Remittance info only
                     "total_actual_provider_payment_amount_02": str(
-                        secondary_payer[0].remaining_patient_liability_AMT.remaining_patient_liability_02),
+                        secondary_other_payer[0].remaining_patient_liability_AMT.remaining_patient_liability_02) if paid else "0.00",
                     # "total_actual_provider_payment_amount_02": str(
-                    #     secondary_payer[0].coordination_of_benefits_cob_payer_paid_amount_AMT.payer_paid_amount_02),
+                    #     secondary_other_payer[0].coordination_of_benefits_cob_payer_paid_amount_AMT.payer_paid_amount_02),
                     # 39.15,  # Total payment to provider
                     "credit_or_debit_flag_code_03": "C",  # C = Credit
-                    "payment_method_code_04": "CHK",  # CHK = Check payment OR ECTON
+                    "payment_method_code_04": "CHK" if paid else "NON",  # CHK = Check payment OR ECTON
 
                     "check_issue_or_eft_effective_date_16": datetime.strptime(
                         service_lines[0].line_adjudication_information_SVD_loop[
@@ -59,7 +78,7 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                 "reassociation_trace_number_TRN": {
                     "trace_type_code_01": "1",  # 1 = Transaction trace number ???
                     "check_or_eft_trace_number_02": bill_id,  # "26407789",  # Trace/check number
-                    "payer_identifier_03": secondary_payer[
+                    "payer_identifier_03": secondary_other_payer[
                         0].other_payer_name_NM1_loop.other_payer_name_NM1.other_payer_primary_identifier_09
                     # Payer's unique identifier
                 },
@@ -78,7 +97,7 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                 "payer_identification_N1_loop": {
                     "payer_identification_N1": {
                         "entity_identifier_code_01": "PR",  # PR = Payer
-                        "payer_name_02": secondary_payer[
+                        "payer_name_02": secondary_other_payer[
                             0].other_payer_name_NM1_loop.other_payer_name_NM1.other_payer_organization_name_03
                         # "KEY INSURANCE COMPANY"  # Name of payer
                     },
@@ -160,12 +179,12 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                             {
                                 "claim_payment_information_CLP": {
                                     "patient_control_number_01": bill_id,  # "26407789",  # Patient's account number
-                                    "claim_status_code_02": "1",  # 1 = Processed as primary claim
+                                    "claim_status_code_02": "1" if paid else "4",  # 1 = Processed as primary claim
                                     "total_claim_charge_amount_03": claim.total_claim_charge_amount_02,
                                     # , 79.04,  # Original charge amount
-                                    # "claim_payment_amount_04": secondary_payer[
+                                    # "claim_payment_amount_04": secondary_other_payer[
                                     #     0].coordination_of_benefits_cob_payer_paid_amount_AMT.payer_paid_amount_02,
-                                    "claim_payment_amount_04": secondary_payer[0].remaining_patient_liability_AMT.remaining_patient_liability_02, ## PAID IN FULL !!!!
+                                    "claim_payment_amount_04": secondary_other_payer[0].remaining_patient_liability_AMT.remaining_patient_liability_02 if paid else 0.00, ## PAID IN FULL !!!!
                                     #"claim_payment_amount_04": claim.total_claim_charge_amount_02, ## PAID IN FULL !!!!
 
                                     # 39.15,  # Paid amount
@@ -174,25 +193,7 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                                     "facility_type_code_08": "11",  # Facility code for the service.  ???
                                     "claim_frequency_code_09": "1"  # 1 = Original claim.  ???
                                 },
-                                "claim_adjustment_CAS": cas_processed
-                                # [
-                                # {
-                                #     "claim_adjustment_group_code_01": "PR",  # PR = Patient Responsibility
-                                #     "adjustment_reason_code_02": "1",  # Deductible
-                                #     "adjustment_amount_03": 21.89  # Deductible amount
-                                # },
-                                # {
-                                #     "claim_adjustment_group_code_01": "CO",  # CO = Contractual Obligation
-                                #     "adjustment_reason_code_02": "2",  # Coinsurance
-                                #     "adjustment_amount_03": 15.00  # Coinsurance amount
-                                # }]
-
-                                # {
-                                #     "claim_adjustment_group_code_01": "PR",  # PR = Patient Responsibility
-                                #     "adjustment_reason_code_02": "1",  # Deductible
-                                #     #"adjustment_amount_03": get_cas_adjusted_amount(line)
-                                #     "adjustment_amount_03": 21.89  # Deductible amount
-                                # }
+                                "claim_adjustment_CAS": None if paid else line_cas_claim
                                 ,
                                 "patient_name_NM1": {
                                     "entity_identifier_code_01": "QC",  # QC = Patient
@@ -219,7 +220,7 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                                             # #43.00,  # Charge for the service
                                             "line_item_provider_payment_amount_03":
                                                 s_line.line_adjudication_information_SVD_loop[
-                                                    0].line_adjudication_information_SVD.service_line_paid_amount_02,
+                                                    0].line_adjudication_information_SVD.service_line_paid_amount_02 if paid else 0.0,
                                             # 40.00,
                                             # Paid amount for the service
                                             "units_of_service_paid_count_05":

@@ -25,8 +25,9 @@ class DateTimeEncoder(json.JSONEncoder):
         #     return obj.isoformat()
         if isinstance(obj, date):
             return obj.isoformat()
-        if isinstance(obj, Decimal):
+        if isinstance(obj, Decimal): #amount: Annotated[Decimal, Field(decimal_places=2)]
             return float(f"{obj:.2f}")  # Convert to float with fixed 2 decimal places
+            #return f"{obj:.2f}"  # Convert to float with fixed 2 decimal places
         # Add support for Pydantic models
         if hasattr(obj, "model_dump"):  # Handle Pydantic models
             res = obj.model_dump()  # Dump the model first

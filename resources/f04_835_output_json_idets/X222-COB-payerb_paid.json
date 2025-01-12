@@ -66,7 +66,7 @@
         "payee_identification_code_04": "1999996666"
       },
       "payee_address_N3": {
-        "payee_address_line_01": "1234 SEAWAY ST"
+        "payee_address_line_01": "1234SEAWAY ST"
       },
       "payee_city_state_zip_code_N4": {
         "payee_city_name_01": "MIAMI",
@@ -115,8 +115,8 @@
                     "product_or_service_id_qualifier_01": "HC",
                     "adjudicated_procedure_code_02": "99213"
                   },
-                  "line_item_charge_amount_02": 43.00,
-                  "line_item_provider_payment_amount_03": 40.00,
+                  "line_item_charge_amount_02": 43.0,
+                  "line_item_provider_payment_amount_03": 40.0,
                   "units_of_service_paid_count_05": 1
                 },
                 "service_date_DTM": [
@@ -132,8 +132,8 @@
                     "product_or_service_id_qualifier_01": "HC",
                     "adjudicated_procedure_code_02": "90782"
                   },
-                  "line_item_charge_amount_02": 15.00,
-                  "line_item_provider_payment_amount_03": 15.00,
+                  "line_item_charge_amount_02": 15.0,
+                  "line_item_provider_payment_amount_03": 15.0,
                   "units_of_service_paid_count_05": 1
                 },
                 "service_date_DTM": [

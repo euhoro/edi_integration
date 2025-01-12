@@ -33,18 +33,6 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
     }
         for i, line in enumerate(lines_cas)]
 
-    service_lines_processed = [
-                                            {
-                                                "date_time_qualifier_01": line.date_service_date_DTP.date_time_qualifier_01,
-                                                # "472",  # 472 = Service date
-
-                                                # "service_date_02": service_lines[0].date_service_date_DTP.service_date_03
-                                                "service_date_02":  # "2005-10-03"  # Date of service
-                                                    datetime.strptime(
-                                                        line.date_service_date_DTP.service_date_03,
-                                                        '%Y%m%d').date()
-                                            } for line in service_lines]
-
     cob_paid = \
         {
             "heading": {
@@ -56,7 +44,9 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                 "financial_information_BPR": {
                     "transaction_handling_code_01": "I",  # I = Remittance info only
                     "total_actual_provider_payment_amount_02": str(
-                        secondary_payer[0].coordination_of_benefits_cob_payer_paid_amount_AMT.payer_paid_amount_02),
+                        secondary_payer[0].remaining_patient_liability_AMT.remaining_patient_liability_02),
+                    # "total_actual_provider_payment_amount_02": str(
+                    #     secondary_payer[0].coordination_of_benefits_cob_payer_paid_amount_AMT.payer_paid_amount_02),
                     # 39.15,  # Total payment to provider
                     "credit_or_debit_flag_code_03": "C",  # C = Credit
                     "payment_method_code_04": "CHK",  # CHK = Check payment OR ECTON
@@ -79,8 +69,10 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                 },
                 "production_date_DTM": {
                     "date_time_qualifier_01": "405",  # 405 = Production date ???
-                    "production_date_02": service_lines[0].line_adjudication_information_SVD_loop[
-                        0].line_check_or_remittance_date_DTP.adjudication_or_payment_date_03
+                    "production_date_02":datetime.strptime(
+                        service_lines[0].line_adjudication_information_SVD_loop[
+                            0].line_check_or_remittance_date_DTP.adjudication_or_payment_date_03,
+                                                        '%Y%m%d').date()
                     # "2005-10-15"  # Date of remittance creation
                 },
                 "payer_identification_N1_loop": {
@@ -171,8 +163,11 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                                     "claim_status_code_02": "1",  # 1 = Processed as primary claim
                                     "total_claim_charge_amount_03": claim.total_claim_charge_amount_02,
                                     # , 79.04,  # Original charge amount
-                                    "claim_payment_amount_04": secondary_payer[
-                                        0].coordination_of_benefits_cob_payer_paid_amount_AMT.payer_paid_amount_02,
+                                    # "claim_payment_amount_04": secondary_payer[
+                                    #     0].coordination_of_benefits_cob_payer_paid_amount_AMT.payer_paid_amount_02,
+                                    "claim_payment_amount_04": secondary_payer[0].remaining_patient_liability_AMT.remaining_patient_liability_02, ## PAID IN FULL !!!!
+                                    #"claim_payment_amount_04": claim.total_claim_charge_amount_02, ## PAID IN FULL !!!!
+
                                     # 39.15,  # Paid amount
                                     "claim_filing_indicator_code_06": "MC",  # MC = Medicaid ???
                                     "payer_claim_control_number_07": "CLAIM1234",  # Payer's claim ID ???
@@ -208,46 +203,43 @@ def convert_x837_to_x835(x837: Edi837Idets) -> EDI835Idets:
                                     # "TED",  # First name
                                     "patient_middle_name_or_initial_05": "N",  # Middle initial ?? ??
                                     "identification_code_qualifier_08": "MI",  # MI = Member ID ???
-                                    "patient_identifier_09": "ABC123456789"  # Member's ID  ??
+                                    "patient_identifier_09": subscriber.subscriber_name_NM1_loop.subscriber_name_NM1.subscriber_primary_identifier_09  #"222334444"  # Member's ID  ??
                                 },
                                 "service_payment_information_SVC_loop": [
                                     {
                                         "service_payment_information_SVC": {
                                             "composite_medical_procedure_identifier_01": {
-                                                "product_or_service_id_qualifier_01": service_lines[
-                                                    0].professional_service_SV1.composite_medical_procedure_identifier_01.product_or_service_id_qualifier_01,
+                                                "product_or_service_id_qualifier_01": s_line.professional_service_SV1.composite_medical_procedure_identifier_01.product_or_service_id_qualifier_01,
                                                 # "HC",
                                                 # HC = Healthcare procedure code
-                                                "adjudicated_procedure_code_02": service_lines[
-                                                    0].professional_service_SV1.composite_medical_procedure_identifier_01.procedure_code_02
+                                                "adjudicated_procedure_code_02": s_line.professional_service_SV1.composite_medical_procedure_identifier_01.procedure_code_02
                                                 # "99213"  # Procedure code
                                             },
-                                            "line_item_charge_amount_02": service_lines[
-                                                0].professional_service_SV1.line_item_charge_amount_02,
+                                            "line_item_charge_amount_02": s_line.professional_service_SV1.line_item_charge_amount_02,
                                             # #43.00,  # Charge for the service
                                             "line_item_provider_payment_amount_03":
-                                                service_lines[0].line_adjudication_information_SVD_loop[
+                                                s_line.line_adjudication_information_SVD_loop[
                                                     0].line_adjudication_information_SVD.service_line_paid_amount_02,
                                             # 40.00,
                                             # Paid amount for the service
                                             "units_of_service_paid_count_05":
-                                                service_lines[0].line_adjudication_information_SVD_loop[
+                                                s_line.line_adjudication_information_SVD_loop[
                                                     0].line_adjudication_information_SVD.paid_service_unit_count_05
                                             # 1  # Number of units
                                         },
                                         "service_date_DTM": [
                                             {
-                                                "date_time_qualifier_01": service_lines[0].date_service_date_DTP.date_time_qualifier_01,
+                                                "date_time_qualifier_01": s_line.date_service_date_DTP.date_time_qualifier_01,
                                                 # "472",  # 472 = Service date
 
                                                 # "service_date_02": service_lines[0].date_service_date_DTP.service_date_03
                                                 "service_date_02":  # "2005-10-03"  # Date of service
                                                     datetime.strptime(
-                                                        service_lines[0].date_service_date_DTP.service_date_03,
+                                                        s_line.date_service_date_DTP.service_date_03,
                                                         '%Y%m%d').date()
-                                            } for line in service_lines]
+                                            }]
                                     }
-                                ]
+                                for i,s_line in enumerate(service_lines)]
                             }
                         ]
                     }

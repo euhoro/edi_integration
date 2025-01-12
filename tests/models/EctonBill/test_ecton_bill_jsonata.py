@@ -119,6 +119,7 @@ def test_jsonata_837_aws_to_idets_after_py_and_convert():
     edi837 = Edi837Idets.model_validate(edi_837_dict)
     ecton_bill = convert_x837_to_ecton_bill(edi837)
     edi835 = convert_x837_to_x835(edi837)
+    #write_as_json(edi835,'resources/f04_835_output_json_idets/X222-COB-payerb_paid.out.json' )
     pass
 
 if __name__ == "__main__":

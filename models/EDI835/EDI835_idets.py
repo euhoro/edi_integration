@@ -147,10 +147,21 @@ class TransactionSetTrailerSE(BaseModel):
     transaction_segment_count_01: int
     transaction_set_control_number_02: int
 
+
+class ReceiverIdentificationREF(BaseModel):
+    reference_identification_qualifier_01: str
+    receiver_identifier_02: str
+
+class ProductionDateDTM(BaseModel):
+    date_time_qualifier_01: str
+    production_date_02: date
+
 class EDI835Header(BaseModel):
     transaction_set_header_ST: TransactionSetHeaderST
     financial_information_BPR: FinancialInformationBPR
     reassociation_trace_number_TRN: ReassociationTraceTRN
+    receiver_identification_REF: Optional[ReceiverIdentificationREF]=None
+    production_date_DTM:Optional[ProductionDateDTM]
     payer_identification_N1_loop: PayerIdentificationLoop
     payee_identification_N1_loop: PayeeIdentificationLoop
 

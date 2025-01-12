@@ -92,11 +92,6 @@
                 "claim_adjustment_group_code_01": "PR",
                 "adjustment_reason_code_02": "2",  // Coinsurance
                 "adjustment_amount_03": 15.00
-              },
-              {
-                "claim_adjustment_group_code_01": "CO",
-                "adjustment_reason_code_02": "45",  // Charge exceeds fee schedule
-                "adjustment_amount_03": 42.15
               }
             ],
             "service_payment_information_SVC_loop": [

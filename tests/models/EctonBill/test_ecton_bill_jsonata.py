@@ -150,7 +150,8 @@ def test_end2end_jsonata_837_aws_to_idets_after_py_and_convert():
 
 def check_835(edi837,expected_file, paid = True):
     edi835_result = convert_x837_to_x835(edi837, paid=paid)
-    json_output = 'resources/f04_835_output_json_idets/X222-COB-payerb_paid.out.json'
+    #json_output = 'resources/f04_835_output_json_idets/X222-COB-payerb_paid.out.json'
+    json_output = str(tempfile.NamedTemporaryFile())
     write_as_json(edi835_result, '%s' % json_output)
     edi835_expected = read_as_json(expected_file)
     edi835_json_output = read_as_json(json_output)

@@ -172,3 +172,4 @@ cython_debug/
 .idea/
 deployment/
 lambda-code.zip
+<tempfile.*

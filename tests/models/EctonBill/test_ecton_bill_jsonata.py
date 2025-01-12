@@ -1,5 +1,6 @@
 import json
 import os
+import tempfile
 
 import jsonata
 import pytest
@@ -54,7 +55,8 @@ def check_jsonata(
     # Apply optional transformation
     if transform_func:
         result = transform_func(result)
-        tmp_tile = input_json_path.replace(".json", ".out-tmp.json")
+        tmp_tile = str(tempfile.NamedTemporaryFile())
+        #tmp_tile = input_json_path.replace(".json", ".out-tmp.json")
         write_as_json(result, tmp_tile)
         #assert os.path.exists(tmp_tile), "Failed to write the resulting file."
 

@@ -1,0 +1,207 @@
+{
+  "interchanges": [
+    {
+      "ISA_01_AuthorizationQualifier": "00",
+      "ISA_02_AuthorizationInformation": "          ",
+      "ISA_03_SecurityQualifier": "00",
+      "ISA_04_SecurityInformation": "          ",
+      "ISA_05_SenderQualifier": "ZZ",
+      "ISA_06_SenderId": "ABCPAYER       ",
+      "ISA_07_ReceiverQualifier": "ZZ",
+      "ISA_08_ReceiverId": "ABCPAYER       ",
+      "ISA_09_Date": "051015",
+      "ISA_10_Time": "0212",
+      "ISA_11_RepetitionSeparator": "^",
+      "ISA_12_Version": "00501",
+      "ISA_13_InterchangeControlNumber": "191511902",
+      "ISA_14_AcknowledgmentRequested": "0",
+      "ISA_15_TestIndicator": "P",
+      "functional_groups": [
+        {
+          "GS_01_FunctionalIdentifierCode": "HP",
+          "GS_02_ApplicationSenderCode": "ABCD",
+          "GS_03_ApplicationReceiverCode": "ABCD",
+          "GS_04_Date": "20051015",
+          "GS_05_Time": "12345678",
+          "GS_06_GroupControlNumber": "12345678",
+          "GS_07_ResponsibleAgencyCode": "X",
+          "GS_08_Version": "005010X221A1",
+          "transactions": [
+            {
+              "ST_01_TransactionSetIdentifierCode": "835",
+              "ST_02_TransactionSetControlNumber": "1234",
+              "segments": [
+                {
+                  "BPR_01": "I",
+                  "BPR_02": "36.89.00",
+                  "BPR_03": "C",
+                  "BPR_04": "CHK",
+                  "BPR_16": "20051015"
+                },
+                {
+                  "TRN_01": "1",
+                  "TRN_02": "26407789",
+                  "TRN_03": "999996666"
+                },
+                {
+                  "REF_01": "EV",
+                  "REF_02": "FAC"
+                },
+                {
+                  "DTM_01": "405",
+                  "DTM_02": "20051015"
+                },
+                {
+                  "N1-1000A_loop": [
+                    {
+                      "N1_01": "PR",
+                      "N1_02": "KEY INSURANCE COMPANY"
+                    },
+                    {
+                      "N3_01": "4456 SOUTH SHORE BLVD"
+                    },
+                    {
+                      "N4_01": "CHICAGO",
+                      "N4_02": "IL",
+                      "N4_03": "44444"
+                    },
+                    {
+                      "PER_01": "CX",
+                      "PER_03": "TE",
+                      "PER_04": "8661112222"
+                    },
+                    {
+                      "PER_01": "BL",
+                      "PER_02": "EDI",
+                      "PER_03": "TE",
+                      "PER_04": "8005551212",
+                      "PER_05": "EM",
+                      "PER_06": "EDI.SUPPORT@ANYPAYER.COM"
+                    },
+                    {
+                      "PER_01": "IC",
+                      "PER_03": "UR",
+                      "PER_04": "WWW.ANYPAYER.COM"
+                    }
+                  ]
+                },
+                {
+                  "N1-1000B_loop": [
+                    {
+                      "N1_01": "PE",
+                      "N1_02": "KILDARE",
+                      "N1_03": "XX",
+                      "N1_04": "1999996666"
+                    },
+                    {
+                      "N3_01": "1234SEAWAY ST"
+                    },
+                    {
+                      "N4_01": "MIAMI",
+                      "N4_02": "FL",
+                      "N4_03": "33111"
+                    },
+                    {
+                      "REF_01": "EI",
+                      "REF_02": "123456789"
+                    }
+                  ]
+                },
+                {
+                  "LX-2000_loop": [
+                    {
+                      "LX_01": "1"
+                    },
+                    {
+                      "CLP-2100_loop": [
+                        {
+                          "CLP_01": "26407789",
+                          "CLP_02": "1",
+                          "CLP_03": "79.04",
+                          "CLP_04": "36.89",
+                          "CLP_06": "MC",
+                          "CLP_07": "CLAIM1234",
+                          "CLP_08": "11",
+                          "CLP_09": "1"
+                        },
+                        {
+                          "NM1_01": "QC",
+                          "NM1_02": "1",
+                          "NM1_03": "SMITH",
+                          "NM1_04": "TED",
+                          "NM1_05": "N",
+                          "NM1_08": "MI",
+                          "NM1_09": "222334444"
+                        },
+                        {},
+                        {
+                          "DTM_02": ""
+                        },
+                        {},
+                        {},
+                        {
+                          "SVC-2110_loop": [
+                            {
+                              "SVC_01": {
+                                "SVC_01_01": "HC",
+                                "SVC_01_02": "99213"
+                              },
+                              "SVC_02": "43",
+                              "SVC_03": "40",
+                              "SVC_05": "1"
+                            },
+                            {
+                              "DTM_01": "472",
+                              "DTM_02": "20051003"
+                            },
+                            {}
+                          ]
+                        },
+                        {
+                          "SVC-2110_loop": [
+                            {
+                              "SVC_01": {
+                                "SVC_01_01": "HC",
+                                "SVC_01_02": "90782"
+                              },
+                              "SVC_02": "15",
+                              "SVC_03": "15",
+                              "SVC_05": "1"
+                            },
+                            {
+                              "DTM_01": "472",
+                              "DTM_02": "20051003"
+                            },
+                            {}
+                          ]
+                        },
+                        {
+                          "SVC-2110_loop": [
+                            {
+                              "SVC_01": {
+                                "SVC_01_01": "HC",
+                                "SVC_01_02": "J3301"
+                              },
+                              "SVC_02": "21.04",
+                              "SVC_03": "21.04",
+                              "SVC_05": "1"
+                            },
+                            {
+                              "DTM_01": "472",
+                              "DTM_02": "20051003"
+                            },
+                            {}
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

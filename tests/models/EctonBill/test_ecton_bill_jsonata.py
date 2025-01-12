@@ -29,8 +29,8 @@ EXPECTED_835_MAPPING_AWS = (
 
 
 def check_jsonata(
-    input_json_path, jsn_mapping_path, expected_json_path, transform_func=None
-):
+    input_json_path, jsn_mapping_path, expected_json_path, transform_func=None,
+        write_tmp_file:bool=False):
     """
     Generic function to check JSON transformation using JSONata mappings.
 
@@ -39,6 +39,7 @@ def check_jsonata(
         jsn_mapping_path (str): Path to the JSONata mapping file.
         expected_json_path (str): Path to the file containing the expected JSON output.
         transform_func (callable): Optional function to transform the resultant JSON before validation.
+        write_tmp_file (bool): Optional function to transform the resultant JSON before validation.
     """
     #root_path = get_root_path()
 
@@ -53,8 +54,9 @@ def check_jsonata(
     # Apply optional transformation
     if transform_func:
         result = transform_func(result)
-        # write_as_json(result,input_json_path.replace(".json", ".out.json"))
-        # assert os.path.exists(temp_output_path), "Failed to write the resulting file."
+        tmp_tile = input_json_path.replace(".json", ".out-tmp.json")
+        write_as_json(result, tmp_tile)
+        #assert os.path.exists(tmp_tile), "Failed to write the resulting file."
 
     # Load the expected JSON file
     expected_data = read_as_json(expected_json_path)
@@ -102,7 +104,7 @@ def test_jsonata_835_idets_to_aws_after_py():
         input_json_path=IDETS_835_JSON,
         jsn_mapping_path=MAPPING_835_JSN,
         expected_json_path=EXPECTED_835_MAPPING_AWS,
-        transform_func=transform_json_ecton835_after_jsonata,
+        transform_func=transform_json_ecton835_after_jsonata
     )
 
 
@@ -111,11 +113,11 @@ def test_jsonata_837_aws_to_idets_after_py():
         input_json_path=IDETS_837_JSON,
         jsn_mapping_path=MAPPING_837_JSN,
         expected_json_path=PAYER_B_JSON,
-        transform_func=transform_json_aws837_after_jsonata,
+        transform_func=transform_json_aws837_after_jsonata
     )
 
 
-def test_jsonata_837_aws_to_idets_after_py_and_convert():
+def test_end2end_jsonata_837_aws_to_idets_after_py_and_convert():
     edi_837_dict = transform_jsonata(IDETS_837_JSON,read_as_str(MAPPING_837_JSN),transform_json_aws837_after_jsonata)
     edi837 = Edi837Idets.model_validate(edi_837_dict)
 
@@ -123,6 +125,24 @@ def test_jsonata_837_aws_to_idets_after_py_and_convert():
 
     check_835(edi837, 'resources/f04_835_output_json_idets/X222-COB-payerb_paid.json')
     check_835(edi837, 'resources/f04_835_output_json_idets/X222-COB-payerb_not_paid.json', False)
+
+
+    check_jsonata(
+        input_json_path='resources/f04_835_output_json_idets/X222-COB-payerb_not_paid.json',
+        jsn_mapping_path=MAPPING_835_JSN,
+        expected_json_path='resources/f04_835_output_json_idets/X222-COB-payerb_not_paid.out-mapping.json',
+        transform_func=transform_json_ecton835_after_jsonata,
+    )
+
+    check_jsonata(
+        input_json_path='resources/f04_835_output_json_idets/X222-COB-payerb_paid.json',
+        jsn_mapping_path=MAPPING_835_JSN,
+        expected_json_path='resources/f04_835_output_json_idets/X222-COB-payerb_paid.out-mapping.json',
+        transform_func=transform_json_ecton835_after_jsonata,
+        write_tmp_file=True
+    )
+
+
     pass
 
 

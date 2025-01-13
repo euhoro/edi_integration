@@ -33,7 +33,7 @@ $allLoops := **."LX-2400_loop";
         "segments": [
           {
             "BPR_01": heading.financial_information_BPR.transaction_handling_code_01,
-            "BPR_02": $string(heading.financial_information_BPR.total_actual_provider_payment_amount_02) & ".00",
+            "BPR_02": $string(heading.financial_information_BPR.total_actual_provider_payment_amount_02) & ($contains($string(heading.financial_information_BPR.total_actual_provider_payment_amount_02), ".") ? "" : ".00"),
             "BPR_03": heading.financial_information_BPR.credit_or_debit_flag_code_03,
             "BPR_04": heading.financial_information_BPR.payment_method_code_04,
             "BPR_16": $replace(heading.financial_information_BPR.check_issue_or_eft_effective_date_16,"-","")

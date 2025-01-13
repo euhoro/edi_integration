@@ -14,7 +14,7 @@
     "reassociation_trace_number_TRN": {
       "trace_type_code_01": "1",
       "check_or_eft_trace_number_02": "26407789",
-      "payer_identifier_03": "999996666"
+      "payer_identifier_03": "9999966661"
     },
     "receiver_identification_REF": {
       "reference_identification_qualifier_01": "EV",
@@ -75,7 +75,7 @@
       },
       "payee_additional_identification_REF": [
         {
-          "reference_identification_qualifier_01": "EI",
+          "reference_identification_qualifier_01": "TJ",
           "additional_payee_identifier_02": "123456789"
         }
       ]
@@ -180,7 +180,7 @@
   },
   "summary": {
     "transaction_set_trailer_SE": {
-      "transaction_segment_count_01": 33,
+      "transaction_segment_count_01": 27,
       "transaction_set_control_number_02": 1234
     }
   }

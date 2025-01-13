@@ -15,7 +15,7 @@ cob_not_paid = \
             "reassociation_trace_number_TRN": {
                 "trace_type_code_01": "1",
                 "check_or_eft_trace_number_02": "26407789",
-                "payer_identifier_03": "999996666"
+                "payer_identifier_03": "1999996666"
             },
             "receiver_identification_REF": {
                 "reference_identification_qualifier_01": "EV",
@@ -171,7 +171,7 @@ cob_not_paid = \
         },
         "summary": {
             "transaction_set_trailer_SE": {
-                "transaction_segment_count_01": 33,
+                "transaction_segment_count_01": 25,
                 "transaction_set_control_number_02": 1234
             }
         }

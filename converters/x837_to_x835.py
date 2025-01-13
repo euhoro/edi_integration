@@ -78,8 +78,10 @@ def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
                 "reassociation_trace_number_TRN": {
                     "trace_type_code_01": "1",  # 1 = Transaction trace number ???
                     "check_or_eft_trace_number_02": bill_id,  # "26407789",  # Trace/check number
-                    "payer_identifier_03": secondary_other_payer[
-                        0].other_payer_name_NM1_loop.other_payer_name_NM1.other_payer_primary_identifier_09
+                    # "payer_identifier_03": secondary_other_payer[
+                    #     0].other_payer_name_NM1_loop.other_payer_name_NM1.other_payer_primary_identifier_09
+                    "payer_identifier_03": bill_provider.billing_provider_name_NM1.billing_provider_identifier_09
+
                     # Payer's unique identifier
                 },
                 "receiver_identification_REF": {
@@ -162,6 +164,7 @@ def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
                     "payee_additional_identification_REF": [
                         {
                             "reference_identification_qualifier_01": bill_provider.billing_provider_tax_identification_REF.reference_identification_qualifier_01,
+                            #"reference_identification_qualifier_01": "TJ",#EV
                             # "EI",  # EI = Employer ID
                             "additional_payee_identifier_02": bill_provider.billing_provider_tax_identification_REF.billing_provider_tax_identification_number_02
                             # "123456789"  # Employer ID number
@@ -248,7 +251,7 @@ def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
             },
             "summary": {
                 "transaction_set_trailer_SE": {
-                    "transaction_segment_count_01": 33,  # Total number of segments
+                    "transaction_segment_count_01": 25,  # Total number of segments
                     "transaction_set_control_number_02": x837.detail.transaction_set_trailer_SE.transaction_set_control_number_02
                     # 1234  # Matches the control number in ST
                 }

@@ -186,6 +186,10 @@ class EDI835Idets(BaseModel):
     detail: EDI835Detail
     summary: EDI835Summary
 
+    # class Config:
+    #     json_encoders = {Decimal: lambda v: float(v)}  # Automatically handle Decimal
+
+
 
 def load_edi_835(json_data: dict) -> EDI835Idets:
     # Convert date strings to date objects

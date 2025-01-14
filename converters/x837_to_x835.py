@@ -12,7 +12,6 @@ def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
             0].patient_hierarchical_level_HL_loop[0]
 
     patient_loop = claim_patient_hierarchy.patient_name_NM1_loop
-    service_facility = claim_patient_hierarchy.claim_information_CLM_loop[0].service_facility_location_name_NM1_loop
     secondary_other_payer = claim_patient_hierarchy.claim_information_CLM_loop[0].other_subscriber_information_SBR_loop
     service_lines = claim_patient_hierarchy.claim_information_CLM_loop[0].service_line_number_LX_loop
     lines_cas = []
@@ -20,18 +19,9 @@ def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
         for svd in x.line_adjudication_information_SVD_loop:
             if svd.line_adjustment_CAS:
                 lines_cas.append(svd.line_adjustment_CAS)
-    sum_cas = sum([x[0].adjustment_amount_03 for x in lines_cas])
 
     claim = claim_patient_hierarchy.claim_information_CLM_loop[0].claim_information_CLM
     bill_id = claim_patient_hierarchy.claim_information_CLM_loop[0].claim_information_CLM.patient_control_number_01
-
-    cas_service_processed = [] if paid else [{
-        "claim_adjustment_group_code_01": "PR",  # PR = Patient Responsibility
-        "adjustment_reason_code_02": "1",  # Deductible
-        # "adjustment_amount_03": get_cas_adjusted_amount(line)
-        "adjustment_amount_03": 21.89  # Deductible amount
-    }
-    for i, line in enumerate(lines_cas)]
 
     line_cas_claim = []
     gr_code = secondary_other_payer[0].claim_level_adjustments_CAS[0].claim_adjustment_group_code_01
@@ -39,7 +29,6 @@ def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
     for x in secondary_other_payer[0].claim_level_adjustments_CAS[0]:
         item_dict0 = x[0]  # Extract dictionary from the object
         item_dict1 = x[1]  # Extract dictionary from the object
-# Get the reason code if exists
         if 'reason_code' in item_dict0:
             last_item = {
                 "claim_adjustment_group_code_01": gr_code,  # PR = Patient Responsibility
@@ -163,9 +152,16 @@ def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
                     },
                     "payee_additional_identification_REF": [
                         {
-                            "reference_identification_qualifier_01": bill_provider.billing_provider_tax_identification_REF.reference_identification_qualifier_01,
+                            #"reference_identification_qualifier_01": bill_provider.billing_provider_tax_identification_REF.reference_identification_qualifier_01,
+                            "reference_identification_qualifier_01": 'PQ',
                             #"reference_identification_qualifier_01": "TJ",#EV
                             # "EI",  # EI = Employer ID
+                            #[\\"0B\\",\\"D3\\",\\"PQ\\",\\"TJ\\"]"}]}'
+                            #   "0B": "State License Number",
+                            #   "D3": "National Council for Prescription Drug Programs Pharmacy Number",
+                            #   "PQ": "Payee Identification",
+                            #   "TJ": "Federal Taxpayer's Identification Number"
+                            # },
                             "additional_payee_identifier_02": bill_provider.billing_provider_tax_identification_REF.billing_provider_tax_identification_number_02
                             # "123456789"  # Employer ID number
                         }

@@ -75,7 +75,7 @@
       },
       "payee_additional_identification_REF": [
         {
-          "reference_identification_qualifier_01": "EI",
+          "reference_identification_qualifier_01": "PQ",
           "additional_payee_identifier_02": "123456789"
         }
       ]

@@ -154,14 +154,7 @@ def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
                         {
                             #"reference_identification_qualifier_01": bill_provider.billing_provider_tax_identification_REF.reference_identification_qualifier_01,
                             "reference_identification_qualifier_01": 'PQ',
-                            #"reference_identification_qualifier_01": "TJ",#EV
-                            # "EI",  # EI = Employer ID
                             #[\\"0B\\",\\"D3\\",\\"PQ\\",\\"TJ\\"]"}]}'
-                            #   "0B": "State License Number",
-                            #   "D3": "National Council for Prescription Drug Programs Pharmacy Number",
-                            #   "PQ": "Payee Identification",
-                            #   "TJ": "Federal Taxpayer's Identification Number"
-                            # },
                             "additional_payee_identifier_02": bill_provider.billing_provider_tax_identification_REF.billing_provider_tax_identification_number_02
                             # "123456789"  # Employer ID number
                         }
@@ -247,7 +240,7 @@ def convert_x837_to_x835(x837: Edi837Idets, paid = True) -> EDI835Idets:
             },
             "summary": {
                 "transaction_set_trailer_SE": {
-                    "transaction_segment_count_01": 25,  # Total number of segments
+                    "transaction_segment_count_01": 25,  # Total number of segments SE ST
                     "transaction_set_control_number_02": x837.detail.transaction_set_trailer_SE.transaction_set_control_number_02
                     # 1234  # Matches the control number in ST
                 }

@@ -1,10 +1,7 @@
 from datetime import datetime
 
-from models.EDI835.EDI835_idets import EDI835Idets
 from models.EDI837.EDI837_idets import Edi837Idets, CompositeDiagnosisCodePointer
 from models.EctonBill.ecton_bill import SecondaryBill
-
-
 
 
 def get_diagnosis_pointers(line:CompositeDiagnosisCodePointer):
